@@ -20,7 +20,7 @@
                                 <input type="text" name="name" id="name"
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('name')
                                     border-red-500
-                                @enderror duration-300"
+                                @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('name') }}">
                                 @error('name')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
@@ -38,7 +38,7 @@
                                 <input type="text" name="username" id="username"
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('username')
                                     border-red-500
-                                @enderror duration-300"
+                                @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('username') }}">
                                 @error('username')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
@@ -58,7 +58,7 @@
                                 <input type="email" name="email" id="email"
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('email')
                                     border-red-500
-                                @enderror duration-300"
+                                @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('email') }}">
                                 @error('email')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
@@ -76,7 +76,7 @@
                                 <input type="password" name="password" id="password"
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('password')
                                     border-red-500
-                                @enderror duration-300"
+                                @enderror duration-300 focus:ring-0 outline-none"
                                     autocomplete="off" value="{{ old('password') }}">
                                 @error('password')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>

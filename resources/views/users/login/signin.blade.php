@@ -21,12 +21,14 @@
                 <div class="mt-5">
                     <label for="email" class="block text-sm font-medium leading-7 text-gray-300">Email</label>
                     <input type="email" name="email" id="email"
-                        class="outline-none mt-2 border-t-0 border-x-0 border-b-2 w-full bg-inherit text-gray-400" required>
+                        class="outline-none mt-2 border-t-0 border-x-0 border-b-2 w-full bg-inherit focus:ring-0  text-gray-400"
+                        required>
                 </div>
                 <div class="mt-5">
                     <label for="Password" class="block text-sm font-medium leading-7 text-gray-300">Password</label>
                     <input type="password" name="password" id="Password"
-                        class="outline-none mt-2 border-t-0 border-x-0 border-b-2 w-full bg-inherit text-gray-400" required>
+                        class=" mt-2 border-t-0 border-x-0 border-b-2 focus:ring-0 outline-none w-full bg-inherit text-gray-400"
+                        required>
                 </div>
                 <div class="w-full mt-6">
                     <button class="bg-indigo-600 w-full text-gray-300 font-semibold text-md rounded-full py-1"
