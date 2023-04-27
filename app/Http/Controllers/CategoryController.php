@@ -39,10 +39,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('users.topics.show', [
-            'blog' => $category->blog->load('category', 'author'),
-            'category' => $category->name
-        ]);
+        // return view('users.topics.show', [
+        //     'blog' => $category->blog->load(['category', 'author']),
+        //     'category' => $category->name
+        // ]);
     }
 
     /**

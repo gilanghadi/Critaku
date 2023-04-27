@@ -1,4 +1,4 @@
-@extends('layouts.main')
+{{-- @extends('layouts.main')
 @section('content')
     <p class="mb-6 text-gray-400 text-2xl">Eksploring<span
             class="text-indigo-600 ms-2 capitalize">//{{ $category }}</span></p>
@@ -23,7 +23,7 @@
                             </span>
                         </div>
                         <p class="text-gray-400 mb-4">
-                            {{ \Illuminate\Support\Str::limit($blog->slug, 200, '...') }}
+                            {{ \Illuminate\Support\Str::limit($blog->body, 100, '...') }}
                         </p>
                         <div class="text-sm">
                             <a href="" class="items-center hover:underline leading-none text-indigo-700 me-2">
@@ -36,4 +36,4 @@
             </div>
         </div>
     @endforeach
-@endsection
+@endsection --}}

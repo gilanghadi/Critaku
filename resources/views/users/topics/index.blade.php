@@ -27,7 +27,7 @@
         </div>
         <div class=" flex flex-row mt-10">
             @foreach ($category as $category)
-                <a href="{{ route('topics.critaku.show', $category->slug) }}"
+                <a href="{{ route('category.critaku.show', $category->slug) }}"
                     class="hover:bg-indigo-700/20 card me-5 ease-out duration-300">
                     <div class="flex flex-row w-64">
                         <div class="me-2 justify-center p-3">

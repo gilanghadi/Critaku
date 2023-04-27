@@ -21,8 +21,8 @@ class BlogFactory extends Factory
             'slug' => $this->faker->slug(),
             'excerpt' => $this->faker->paragraph(),
             'body' => $this->faker->paragraph(random_int(5, 10)),
-            'category_id' => random_int(1, 2),
-            'user_id' => random_int(1, 2),
+            'category_id' => random_int(1, 3),
+            'user_id' => random_int(1, 3),
         ];
     }
 }

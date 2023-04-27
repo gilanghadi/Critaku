@@ -21,6 +21,7 @@
         @yield('content')
     </div>
     <script src="{{ asset('assets/fontawesome-free-6.4.0-web/js/all.js') }}"></script>
+    @vite('resources/js/app.js')
 </body>
 
 </html>

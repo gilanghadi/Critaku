@@ -15,7 +15,7 @@
                                 </a>
                             </span>
                             <span>
-                                <a href="{{ route('topics.critaku.show', $blog->category->slug) }}"
+                                <a href="{{ route('category.critaku.show', $blog->category->slug) }}"
                                     class="lg:px-5 hover:text-indigo-700 capitalize text-sm ease-out duration-300 text-gray-300 rounded-full border border-gray-300 flex items-center py-1 hover:bg-white">{{ $blog->category->name }}
                                 </a>
                             </span>

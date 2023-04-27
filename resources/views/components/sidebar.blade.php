@@ -18,8 +18,8 @@
                         Blogs</a>
                 </li>
                 <li
-                    class="cursor-pointer mb-3 ease-in-out duration-300 hover:bg-indigo-900/30 hover:text-white p-2 ps-4 text-gray-300 rounded-lg {{ Route::is('topics.critaku') ? 'bg-indigo-900/30 text-white' : '' }}">
-                    @if (Route::is('topics.critaku'))
+                    class="cursor-pointer mb-3 ease-in-out duration-300 hover:bg-indigo-900/30 hover:text-white p-2 ps-4 text-gray-300 rounded-lg {{ Route::is('category.critaku') ? 'bg-indigo-900/30 text-white' : '' }}">
+                    @if (Route::is('category.critaku'))
                         <i class="fa-solid fa-square text-indigo-600"></i>
                     @else
                         <i class="fa-regular fa-square"></i>

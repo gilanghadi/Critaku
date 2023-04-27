@@ -25,5 +25,11 @@ class CategorySeeder extends Seeder
                 'slug' => 'personal',
             ],
         );
+        DB::table('categories')->insert(
+            [
+                'name' => 'web design',
+                'slug' => 'web_design',
+            ],
+        );
     }
 }

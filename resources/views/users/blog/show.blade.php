@@ -10,7 +10,7 @@
             </div>
             <p class="my-3 mt-4 text-sm text-gray-300"> <a href=""
                     class="text-indigo-700 hover:underline">gilanghadi</a> in
-                <a href="{{ route('topics.critaku.show', $blog->category->slug) }}" class="hover:underline">
+                <a href="{{ route('category.critaku.show', $blog->category->slug) }}" class="hover:underline">
                     {{ $blog->category->name }}</a>
             </p>
             <p class="text-gray-400 text-base">

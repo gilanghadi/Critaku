@@ -13,13 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/signin', 'App\Http\Controllers\UserController@signin')->name('signin.critaku')->middleware('guest');
+Route::post('/signin', 'App\Http\Controllers\UserController@authenticate')->name('signinPost.critaku');
+Route::get('/register', 'App\Http\Controllers\UserController@register')->name('register.critaku')->middleware('guest');
+Route::post('/register', 'App\Http\Controllers\UserController@registerStore')->name('registerPost.critaku');
+Route::post('/logout', 'App\Http\Controllers\UserController@logout')->name('logout.critaku');
+
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.critaku');
 
 Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about.critaku');
 
 Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
-Route::get('/blog/{blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');
-Route::get('/blog/author/{author:username}', 'App\Http\Controllers\UserController@index')->name('blog.author.critaku');
+Route::get('/blog?{blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');
+Route::get('/blog?author={author:username}', 'App\Http\Controllers\UserController@index')->name('blog.author.critaku');
 
-Route::get('/topics', 'App\Http\Controllers\CategoryController@index')->name('topics.critaku');
-Route::get('/topics/{category:slug}', 'App\Http\Controllers\CategoryController@show')->name('topics.critaku.show');
+Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category.critaku');
+Route::get('/blog?category={category:slug}', 'App\Http\Controllers\CategoryController@show')->name('category.critaku.show');
