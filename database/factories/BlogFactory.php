@@ -22,7 +22,7 @@ class BlogFactory extends Factory
             'excerpt' => $this->faker->paragraph(),
             'body' => $this->faker->paragraph(random_int(5, 10)),
             'category_id' => random_int(1, 3),
-            'user_id' => random_int(1, 3),
+            'user_id' => random_int(1, 4),
         ];
     }
 }

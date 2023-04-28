@@ -20,9 +20,9 @@ Route::get('/register', 'App\Http\Controllers\UserController@register')->name('r
 Route::post('/register', 'App\Http\Controllers\UserController@registerStore')->name('registerPost.critaku');
 Route::post('/logout', 'App\Http\Controllers\UserController@logout')->name('logout.critaku');
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.critaku');
+Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('home.critaku')->middleware('auth');
 
-Route::get('/about', 'App\Http\Controllers\HomeController@about')->name('about.critaku');
+Route::get('/profile', 'App\Http\Controllers\HomeController@profile')->name('profile.critaku')->middleware('auth');
 
 Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
 Route::get('/blog?{blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');

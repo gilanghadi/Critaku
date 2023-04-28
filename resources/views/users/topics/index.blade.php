@@ -9,37 +9,40 @@
             </p>
         </div>
         <div class="mt-14">
-            <nav class="">
+            <nav class="border-b-2 border-gray-400  w-full md:w-7/12 mx-auto">
                 <div class="mx-auto max-w-full lg:px-8">
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <div class="block mx-auto">
+                        <div class="mx-auto">
                             <div class="flex space-x-9">
+                                <a href="{{ route('category.critaku') }}"
+                                    class="text-gray-300  lowercase border-indigo-600 pb-3 hover:text-white px-3 text-lg font-medium {{ Route::is('category.critaku') ? 'border-b-4 focus:z-50' : '' }}">All
+                                    Topics</a>
                                 @foreach ($category as $navCategory)
-                                    <a href="{{ route('home.critaku') }}"
-                                        class="text-gray-300  capitalize border-gray-950 pb-4 hover:text-white px-3 text-lg font-medium {{ Route::is() ? 'border-b-4' : '' }}">{{ $navCategory->name }}</a>
+                                    <a href="{{ route('category.critaku.show', $navCategory->slug) }}"
+                                        class="text-gray-300  lowercase border-indigo-600 pb-3 hover:text-white px-3 text-lg font-medium {{ Route::is('category.critaku.show') ? 'border-b-4 focus:z-50' : '' }}">{{ $navCategory->name }}</a>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
-            <hr class="border-gray-400 border rounded">
+            {{-- <hr class="border-gray-400 border-2 rounded w-full md:w-7/12 mx-auto"> --}}
         </div>
-        <div class=" flex flex-row mt-10">
+        <div class=" flex flex-row mt-10 mx-10">
             @foreach ($category as $category)
                 <a href="{{ route('category.critaku.show', $category->slug) }}"
-                    class="hover:bg-indigo-700/20 card me-5 ease-out duration-300">
-                    <div class="flex flex-row w-64">
-                        <div class="me-2 justify-center p-3">
+                    class="hover:bg-indigo-700/20 card me-5 ease-out duration-300 rounded-2xl">
+                    <div class="flex flex-row w-full mx-4 md:w-56 md:mx-0 py-2">
+                        <div class="flex items-center m-4">
                             <img src="https://plus.unsplash.com/premium_photo-1674599004939-000417962c69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"
-                                class="h-48 lg:h-16 lg:w-16 rounded" alt="" />
+                                class="h-48 lg:h-10 lg:w-12 rounded" alt="" />
                         </div>
-                        <div class="w-full lg:w-auto mt-3 flex justify-between md:block">
-                            <h1 class="text-left text-xl  mb-1 font-semibold text-indigo-700 capitalize">
+                        <div class="w-full mt-3 md:block">
+                            <h1 class="text-left text-lg font-semibold text-indigo-700 capitalize">
                                 {{ $category->name }}
                             </h1>
-                            <div class="hidden text-left md:block text-extrasmall text-white md:text-grey-600/50">
-                                1 Blogs
+                            <div class="text-left md:block text-gray-400" style="font-size: 12px;">
+                                {{ $category->blog->count() }} blogs
                             </div>
                         </div>
                     </div>

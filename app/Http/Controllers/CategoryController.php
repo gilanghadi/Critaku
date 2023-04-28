@@ -13,8 +13,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category = Category::with(['blog'])->get();
         return view('users.topics.index', [
-            'category' => Category::all(),
+            'category' => $category,
+            'blog' => Blog::where('category_id', $category)
         ]);
     }
 
@@ -39,10 +41,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        // return view('users.topics.show', [
-        //     'blog' => $category->blog->load(['category', 'author']),
-        //     'category' => $category->name
-        // ]);
     }
 
     /**

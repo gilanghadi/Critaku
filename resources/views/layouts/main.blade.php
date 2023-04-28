@@ -14,10 +14,7 @@
 
 <body class="bg-indigo-950">
     <x-navbar />
-    @if (Route::is('blog.critaku'))
-        <x-sidebar />
-    @endif
-    <div id="main" class="w-8/12 mx-auto py-10">
+    <div id="main" class="mx-auto py-10">
         @yield('content')
     </div>
     <script src="{{ asset('assets/fontawesome-free-6.4.0-web/js/all.js') }}"></script>

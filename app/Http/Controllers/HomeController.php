@@ -11,8 +11,8 @@ class HomeController extends Controller
     return view('users.home.index');
   }
 
-  public function about()
+  public function profile()
   {
-    return view('users.about.index');
+    return view('users.profile.index');
   }
 }

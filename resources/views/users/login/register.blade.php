@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex justify-center">
+    <div class="flex justify-center w-full md:w-7/12 mx-auto">
         <form action="{{ route('registerPost.critaku') }}" method="post" class="w-full md:w-9/12">
             @csrf
             <div class="mx-auto card px-12 py-8">
