@@ -39,7 +39,7 @@ class UserController extends Controller
 
         if (Auth::attempt($validator)) {
             $request->session()->regenerateToken();
-            return redirect()->intended()->route('home.critaku')->with('success', 'You Already Access');
+            return redirect()->intended('/dashboard')->with('success', 'You Already Access');
         }
 
         return back()->with('error', 'Sign in Failed, Check Your Email And Pass');

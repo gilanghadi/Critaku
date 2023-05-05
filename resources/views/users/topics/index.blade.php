@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="w-full">
-        <div class="mx-auto text-center mt-8">
+        <div class="mx-auto text-center md:mt-24 mt-10">
             <p class="capitalize text-5xl mb-5 font-sans text-gray-300">Explore By Topic</p>
             <p class="capitalize text-lg text-gray-400 font-sans">This will give you an alternative way to decide what
                 <span class="text-indigo-700">//topic</span>

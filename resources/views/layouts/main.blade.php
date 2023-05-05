@@ -14,11 +14,32 @@
 
 <body class="bg-indigo-950">
     <x-navbar />
+    @if (Route::is('blog.critaku'))
+        <x-sidebar />
+    @elseif (Route::is('home.critaku'))
+        <x-sidebar />
+    @endif
     <div id="main" class="mx-auto py-10">
         @yield('content')
     </div>
     <script src="{{ asset('assets/fontawesome-free-6.4.0-web/js/all.js') }}"></script>
     @vite('resources/js/app.js')
+    <script type="text/javascript">
+        let togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function(e) {
+            let inputPassword = document.getElementById('password');
+            if (inputPassword.getAttribute('type') == 'password') {
+                inputPassword.setAttribute('type', 'text')
+                togglePassword.classList.remove('fa fa-eye-slash');
+                togglePassword.classList.add('fa fa-eye')
+            } else {
+                inputPassword.setAttribute('type', 'password');
+                togglePassword.classList.remove('fa fa-eye')
+                togglePassword.classList.add('fa fa-eye-slash');
+            }
+        })
+    </script>
 </body>
 
 </html>

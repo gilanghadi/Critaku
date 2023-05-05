@@ -1,12 +1,13 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex justify-center w-full md:w-7/12 mx-auto">
+    <div class="flex justify-center w-full md:w-7/12 mx-auto mt-10">
         <form action="{{ route('registerPost.critaku') }}" method="post" class="w-full md:w-9/12">
             @csrf
             <div class="mx-auto card px-12 py-8">
                 <h2 class="text-3xl mb-4 font-semibold text-indigo-600">Register | Critaku</h2>
                 @if (Session::has('error'))
-                    <div class="bg-red-500/20 py-3 px-4 flex justify-between rounded-lg text-gray-300 text-sm" id="alert">
+                    <div class="bg-red-500/20 py-3 px-3 capitalize flex justify-between rounded-lg text-gray-300 text-sm"
+                        id="alert">
                         {{ Session::get('error') }}
                         <button type="submit" data-collapse-toggle="alert"><i class="fa-solid fa-x"></i></button>
                     </div>

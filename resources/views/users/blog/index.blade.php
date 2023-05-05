@@ -23,7 +23,7 @@
             @if ($b->count())
                 <div class="mb-4">
                     <div class="card lg:p-5 rounded-lg flex flex-row">
-                        <img src="https://plus.unsplash.com/premium_photo-1674599004939-000417962c69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"
+                        <img src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
                             class="h-48 lg:h-20 lg:w-20 rounded-lg text-center" alt="" />
                         <div class="flex flex-col w-full ms-5">
                             <div class="flex flex-row justify-between mb-2">
