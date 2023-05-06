@@ -21,6 +21,8 @@ Route::post('/register', 'App\Http\Controllers\UserController@registerStore')->n
 Route::post('/logout', 'App\Http\Controllers\UserController@logout')->name('logout.critaku');
 
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('home.critaku')->middleware('auth');
+Route::get('/dashboard/blog/create',  'App\Http\Controllers\HomeController@create')->name('homeCreate.critaku')->middleware('auth');
+Route::post('/dashboard/blog/store',  'App\Http\Controllers\HomeController@store')->name('homeStore.critaku')->middleware('auth');
 
 Route::get('/profile', 'App\Http\Controllers\HomeController@profile')->name('profile.critaku')->middleware('auth');
 

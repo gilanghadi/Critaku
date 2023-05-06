@@ -18,3 +18,13 @@
 .text-extrasmall {
   font-size: 11px !important;
 }
+
+.inputAutofill:-webkit-autofill,
+.inputAutofill:-webkit-autofill:hover,
+.inputAutofill:-webkit-autofill:focus,
+.inputAutofill:-webkit-autofill:active {
+  margin-top: 3px;
+  padding: 10px;
+  -webkit-box-shadow: 0 0 0 30px #272452 inset !important;
+  -webkit-text-fill-color: #8E95A4 !important;
+}

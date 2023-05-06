@@ -19,7 +19,7 @@
                                 Name</label>
                             <div class="flex flex-row relative">
                                 <input type="text" name="name" id="name"
-                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('name')
+                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('name')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('name') }}">
@@ -37,7 +37,7 @@
                             <label for="username" class="block text-sm font-medium leading-7 text-gray-300">Username</label>
                             <div class="flex flex-row relative">
                                 <input type="text" name="username" id="username"
-                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('username')
+                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('username')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('username') }}">
@@ -57,7 +57,7 @@
                             <label for="email" class="block text-sm font-medium leading-7 text-gray-300">Email</label>
                             <div class="flex flex-row relative">
                                 <input type="email" name="email" id="email"
-                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('email')
+                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('email')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
                                     value="{{ old('email') }}">
@@ -75,7 +75,7 @@
                             <label for="Password" class="block text-sm font-medium leading-7 text-gray-300">Password</label>
                             <div class="flex flex-row relative">
                                 <input type="password" name="password" id="password"
-                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 @error('password')
+                                    class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('password')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
                                     autocomplete="off" value="{{ old('password') }}">

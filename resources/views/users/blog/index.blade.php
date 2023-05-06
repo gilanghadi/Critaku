@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+    <x-sidebar />
     <div class="w-full lg:w-7/12 mx-auto mt-10">
         <div class="mb-6 flex justify-end">
             <form action="{{ route('blog.critaku') }}" method="get">

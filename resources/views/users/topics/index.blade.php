@@ -15,7 +15,7 @@
                         <div class="mx-auto">
                             <div class="flex space-x-9">
                                 <a href="{{ route('category.critaku') }}"
-                                    class="text-gray-300  lowercase border-indigo-600 pb-3 hover:text-white px-3 text-lg font-medium {{ Route::is('category.critaku') ? 'border-b-4 focus:z-50' : '' }}">All
+                                    class="text-gray-300  lowercase border-indigo-600 pb-3 hover:text-white px-3 text-lg font-medium {{ Request::is('/categories*') ? 'border-b-4 focus:z-50' : '' }}">All
                                     Topics</a>
                                 @foreach ($category as $navCategory)
                                     <a href="{{ route('category.critaku.show', $navCategory->slug) }}"

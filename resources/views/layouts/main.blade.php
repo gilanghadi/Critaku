@@ -8,17 +8,19 @@
     <meta name="description" content="sebuah website blog crita untuk semua orang">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome-free-6.4.0-web/css/all.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
     <title>Critaku</title>
     @vite('resources/css/app.css')
 </head>
 
 <body class="bg-indigo-950">
     <x-navbar />
-    @if (Route::is('blog.critaku'))
+    {{-- @if (Route::is('blog.critaku'))
         <x-sidebar />
     @elseif (Route::is('home.critaku'))
         <x-sidebar />
-    @endif
+    @endif --}}
     <div id="main" class="mx-auto py-10">
         @yield('content')
     </div>
