@@ -28,3 +28,11 @@
   -webkit-box-shadow: 0 0 0 30px #272452 inset !important;
   -webkit-text-fill-color: #8E95A4 !important;
 }
+
+trix-toolbar [data-trix-button-group="file-tools"] {
+  display: none !important
+}
+
+.trix-button-group .trix-button {
+  background-color: white !important;
+}

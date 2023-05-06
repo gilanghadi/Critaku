@@ -16,10 +16,8 @@
                 <div class="flex flex-shrink-0 items-center space-x-4">
                     <a href="{{ route('home.critaku') }}"
                         class="text-3xl font-bold  text-indigo-700 font-mono antialiased no-underline">Critaku</a>
-                    @auth
-                        <a href="{{ route('home.critaku') }}"
-                            class="text-gray-300 hover:border-b-2 border-indigo-600 hover:text-white px-4 py-3  text-sm font-medium {{ Route::is('home.critaku') ? 'border-b-2 text-white' : '' }}">Dashboard</a>
-                    @endauth
+                    <a href="{{ route('home.critaku') }}"
+                        class="text-gray-300 hover:border-b-2 border-indigo-600 hover:text-white px-4 py-3  text-sm font-medium {{ Route::is('home.critaku') ? 'border-b-2 text-white' : '' }}">Dashboard</a>
                     <a href="{{ route('blog.critaku') }}"
                         class="text-gray-300 hover:border-b-2 border-indigo-600 hover:text-white px-4 py-3  text-sm font-medium {{ Route::is('blog.critaku') ? 'border-b-2 text-white' : '' }}">Blog</a>
                     <a href="{{ route('category.critaku') }}"

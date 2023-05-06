@@ -29,6 +29,9 @@ class HomeController extends Controller
 
   public function profile()
   {
+    if (!Auth::user()) {
+      return redirect()->route('signin.critaku')->with('error', 'Your Are Not Login');
+    }
     return view('users.profile.index');
   }
 }

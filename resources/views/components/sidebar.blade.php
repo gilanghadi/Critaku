@@ -30,15 +30,17 @@
                     <span class="ml-3">Profile</span>
                 </a>
             </li>
-            <li>
-                <form action="{{ route('logout.critaku') }}" method="post">
-                    @csrf
-                    <button type="submit"
-                        class="w-full p-2 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
-                        role="menuitem"><i class="fa-solid fa-right-from-bracket me-3 text-white"></i> Sign
-                        Out</button>
-                </form>
-            </li>
+            @auth
+                <li>
+                    <form action="{{ route('logout.critaku') }}" method="post">
+                        @csrf
+                        <button type="submit"
+                            class="w-full p-2 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
+                            role="menuitem"><i class="fa-solid fa-right-from-bracket me-3 text-white"></i> Sign
+                            Out</button>
+                    </form>
+                </li>
+            @endauth
         </ul>
     </div>
 </aside>
