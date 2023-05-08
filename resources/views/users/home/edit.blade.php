@@ -1,10 +1,9 @@
 @extends('layouts.main')
 @section('content')
     <x-sidebar />
-    <div class="mx-5 lg:w-7/12 md:mx-14 lg:ms-64 xl:mx-auto mt-10">
-        <h1 class="text-3xl text-gray-300 border-b border-gray-400 mb-8 pb-4 font-sans font-medium">Create Your Blog</h1>
-        <form action="{{ route('homeStore.critaku') }}" class="w-full" method="post" enctype="multipart/form-data"
-            id="form">
+    <div class="lg:w-7/12 md:mx-14 lg:ms-64 xl:mx-auto mt-10 mx-5">
+        <h1 class="text-3xl text-gray-300 border-b border-gray-400 mb-8 pb-4 font-sans font-medium">Update Your Blog</h1>
+        <form action="{{ route('homeUpdate.critaku', $blog->slug) }}" class="w-full" method="post">
             @csrf
             <div class="mb-6">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-400">Title
@@ -14,7 +13,7 @@
                         class="bg-indigo-900 text-gray-300 text-sm rounded-lg focus:ring-indigo-600  block w-full p-2.5 inputAutofill @error('title')
                                 border-red-500
                             @enderror"
-                        value="{{ old('title') }}" required>
+                        value="{{ old('title', $blog->title) }}" required>
                     @error('title')
                         <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-4"></i>
                     @enderror
@@ -32,56 +31,28 @@
                     class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full p-2.5 inputAutofill @error('slug')
                     border-red-500
                 @enderror"
-                    readonly value="{{ old('slug') }}" required>
+                    readonly value="{{ old('slug', $blog->slug) }}" required>
                 <p class="ms-1 text-gray-500 text-sm font-sans">Slug Is Automatically Filled According To The Title Blog !
                 </p>
             </div>
-            <div class="mb-6">
+            <div class="mb-14">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-400">Choose Category</label>
-                <select id="option" name="category_id"
+                <select id="category" name="category_id"
                     class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full p-2.5">
                     @foreach ($categories as $category)
-                        @if (old('category_id' == $category->id))
+                        @if (old('category_id', $blog->category_id) == $category->id)
                             <option value="{{ $category->id }}" class="capitalize" selected>{{ $category->name }}
                             </option>
                         @else
                             <option value="{{ $category->id }}" class="capitalize">{{ $category->name }}</option>
                         @endif
                     @endforeach
-                    <option value="other" id="other">other</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
-            <div class="mb-6" id="inputCategory">
-                <label for="categories" class="block mb-2 text-sm font-medium text-gray-400">Category
-                </label>
-                <input type="text" id="categories" name="name"
-                    class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full p-2.5 inputAutofill @error('categories')
-                    border-red-500
-                @enderror"
-                    value="{{ old('name') }}">
-                @error('name')
-                    <div class="text-red-500 text-sm">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-14">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-400">Image
-                </label>
-                <img src=" " alt="" id="img-preview" class="w-52 mb-5 rounded-sm">
-                <input type="file" id="image" name="image"
-                    class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full inputAutofill @error('image')
-                    border-red-500
-                @enderror"
-                    value="{{ old('image') }}" required onchange="preview()">
-                @error('image')
-                    <div class="text-red-500 text-sm">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
             <div class="mb-10">
-                <input id="body" type="hidden" name="body" value="{{ old('body') }}">
+                <input id="body" type="hidden" name="body"
+                    value="{{ old('body', strip_tags(html_entity_decode($blog->body))) }}">
                 <trix-editor input="body" class="text-gray-300 border-2 rounded-lg border-indigo-900"></trix-editor>
                 @error('body')
                     <div class="text-red-500 text-sm">
@@ -94,10 +65,11 @@
                     class="px-3 text-gray-400 text-sm py-2.5 text-center bg-indigo-600/70 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg"><i
                         class="fa-solid fa-arrow-left"></i></a>
                 <button type="submit"
-                    class="text-white bg-indigo-600/70 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm ms-2 sm:w-auto px-5 py-2.5 text-center">Create
+                    class="text-white bg-indigo-600/70 hover:bg-indigo-700 focus:outline-none font-medium rounded-lg text-sm ms-2 sm:w-auto px-5 py-2.5 text-center">Update
                     Blog</button>
             </span>
         </form>
+
     </div>
 
 
@@ -115,25 +87,5 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault()
         })
-
-        function preview() {
-            const imgPreview = document.querySelector('#img-preview')
-            const inputImage = document.querySelector('#image')
-            imgPreview.style.display = 'block'
-
-            const oFReader = new FileReader()
-            oFReader.readAsDataURL(inputImage.files[0])
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result
-            }
-        }
-
-        $('#category').on('change', function(e) {
-            const opt = $('#category').val();
-            if (opt === 'other') {
-                $('#inputCategory').css('display', 'inline');
-            }
-        });
     </script>
 @endsection

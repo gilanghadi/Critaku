@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -39,7 +40,8 @@ class UserController extends Controller
 
         if (Auth::attempt($validator)) {
             $request->session()->regenerateToken();
-            return redirect()->intended('/dashboard')->with('success', 'You Already Access');
+            return redirect()->intended('/dashboard')->with('success', '
+            Login successed');
         }
 
         return back()->with('error', 'Sign in Failed, Check Your Email And Pass');
@@ -68,5 +70,25 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('blog.critaku');
+    }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'image' => 'image',
+        ]);
+
+        if ($request->file('image')) {
+            $validator['image'] = $request->file('image')->store('image/profile');
+        }
+
+        if ($request->username != $user->username) {
+            $validator['username'] =  'required|unique:users';
+        }
+
+        User::where('id', Auth::user()->id)->update($validator);
+        return redirect()->route('profile.critaku')->with('success', 'Profile has been updated');
     }
 }

@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class BlogController extends Controller
 {
@@ -13,8 +18,6 @@ class BlogController extends Controller
      */
     public function index()
     {
-
-
         $blog = Blog::with(['author', 'category'])->latest();
         return view('users.blog.index', [
             'blog' => $blog->filter(request(['search', 'category', 'author']))->paginate(10)->withQueryString(),
@@ -24,9 +27,14 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Blog $blog)
     {
-        //
+        if (!Auth::user()) {
+            return redirect()->route('signin.critaku')->with('error', 'Your Are Not Login');
+        }
+        return view('users.home.create', [
+            'categories' => Category::with(['blog'])->get()
+        ]);
     }
 
     /**
@@ -34,7 +42,29 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'title' => 'required|max:225',
+            'slug' => 'required|unique:blogs',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:3048|',
+            'category_id' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required',
+        ]);
+
+        if ($request->file('image')) {
+            $validator['image'] = $request->file('image')->store('image/blog');
+        }
+
+        $validator['excerpt'] = Str::limit(strip_tags($request->body), '200');
+        $validator['user_id'] = Auth::user()->id;
+        Blog::create($validator);
+
+        $category = new Category();
+        $category->id = $category->id->count() + 1;
+        $category->name = $request->name;
+        $category->slug = $request->name;
+        $category->save();
+        return redirect()->route('home.critaku')->with('success', 'New Blog Has Been Added');
     }
 
     /**
@@ -43,7 +73,7 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         // $blog = Blog::findOrFail($id)->first();
-        $blog = Blog::with(['author', 'category'])->get();
+        // $blog = Blog::with(['author', 'category'])->get();
         return view('users.blog.show', [
             'blog' => $blog
         ]);
@@ -53,7 +83,11 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        $blog = Blog::findOrFail($blog->id);
+        return view('users.home.edit', [
+            'blog' => $blog,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -61,7 +95,20 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $validator = $request->validate([
+            'title' => 'required|max:225',
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        if ($request->slug != $blog->slug) {
+            $validator['slug'] = 'required|unique:blogs';
+        }
+
+        $validator['user_id'] = Auth::user()->id;
+        $validator['excerpt'] = Str::limit(strip_tags($request->body), '200');
+        Blog::where('id', $blog->id)->update($validator);
+        return redirect()->route('home.critaku')->with('success', 'Blog Has Been Updated');
     }
 
     /**
@@ -69,6 +116,13 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        Blog::destroy($blog->id);
+        return redirect()->route('home.critaku')->with('success', 'Deleted Successed!');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Blog::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

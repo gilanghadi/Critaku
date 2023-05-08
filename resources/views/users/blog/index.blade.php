@@ -1,8 +1,8 @@
 @extends('layouts.main')
 @section('content')
     <x-sidebar />
-    <div class="w-full lg:w-7/12 mx-auto mt-10">
-        <div class="mb-6 flex justify-end">
+    <div class="w-full lg:w-7/12 lg:ms-64 xl:mx-auto mt-10">
+        <div class="mb-6 flex justify-end mx-5 lg:mx-0">
             <form action="{{ route('blog.critaku') }}" method="get">
                 @if (request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
@@ -22,26 +22,29 @@
         </div>
         @foreach ($blog as $b)
             @if ($b->count())
-                <div class="mb-4">
-                    <div class="card lg:p-5 rounded-lg flex flex-row">
-                        <img src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
-                            class="h-48 lg:h-20 lg:w-20 rounded-lg text-center" alt="" />
-                        <div class="flex flex-col w-full ms-5">
+                <div class="mb-4 mx-5 lg:mx-0">
+                    <div class="card p-5 rounded-lg flex flex-col lg:flex-row">
+                        <div class="flex">
+                            <img src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
+                                class="h-20 w-20 rounded-lg text-center mb-3 lg:mb-0" alt="" />
+                            <span class="text-gray-300 ms-3 flex items-center lg:hidden">{{ $b->author->username }}</span>
+                        </div>
+                        <div class="flex flex-col w-full lg:ms-5">
                             <div class="flex flex-row justify-between mb-2">
                                 <span>
                                     <a href="{{ route('blog.critaku.show', $b->slug) }}"
-                                        class="text-indigo-700 hover:underline font-bold text-xl mb-2">
+                                        class="text-indigo-700 hover:underline font-bold text-xl mb-2 capitalizes">
                                         {{ \Illuminate\Support\Str::limit($b->title, 40, '...') }}
                                     </a>
                                 </span>
                                 <span>
                                     <a href="{{ route('category.critaku.show', $b->category->slug) }}"
-                                        class="lg:px-5 hover:text-indigo-700 capitalize text-sm ease-out duration-300 text-gray-300 rounded-full border border-gray-300 flex items-center py-1 hover:bg-white">{{ $b->category->name }}
+                                        class="px-2 xl:px-5 hover:text-indigo-700 capitalize text-sm ease-out duration-300 text-gray-300 rounded-full border border-gray-300 flex items-center py-1 hover:bg-white">{{ $b->category->name }}
                                     </a>
                                 </span>
                             </div>
                             <p class="text-gray-400 mb-4">
-                                {{ \Illuminate\Support\Str::limit($b->body, 120, '...') }}
+                                {{ $b->excerpt }}
                             </p>
                             <div class="text-sm">
                                 <a href="{{ route('blog.author.critaku', $b->author->username) }}"
@@ -59,6 +62,8 @@
                 </div>
             @endif
         @endforeach
-        {{ $blog->links() }}
+        <div class="px-5 lg:px-0">
+            {{ $blog->links() }}
+        </div>
     </div>
 @endsection

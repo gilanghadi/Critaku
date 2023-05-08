@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex justify-center w-full md:w-7/12 mx-auto mt-10">
-        <form action="{{ route('registerPost.critaku') }}" method="post" class="w-full md:w-9/12">
+    <div class="flex justify-center w-full mx-auto mt-10">
+        <form action="{{ route('registerPost.critaku') }}" method="post" class="">
             @csrf
             <div class="mx-auto card px-12 py-8">
                 <h2 class="text-3xl mb-4 font-semibold text-indigo-600">Register | Critaku</h2>
@@ -60,7 +60,7 @@
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('email')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
-                                    value="{{ old('email') }}">
+                                    value="{{ old('email') }}" required>
                                 @error('email')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
                                 @enderror
@@ -78,7 +78,7 @@
                                     class="mt-2 w-full border-t-0 border-b-2 border-x-0 bg-inherit text-gray-400 inputAutofill @error('password')
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
-                                    autocomplete="off" value="{{ old('password') }}">
+                                    autocomplete="off" value="{{ old('password') }}" required>
                                 @error('password')
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
                                 @enderror
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="w-full mt-6">
-                    <button class="bg-indigo-600 w-full text-gray-300 font-semibold text-md rounded-full py-1"
+                    <button class="bg-indigo-700 w-full text-gray-300 font-semibold text-md rounded-full py-1"
                         type="submit" name="submit">Register</button>
                     <p class="mt-3 text-gray-400 text-sm">You Have Already Any Account?<a
                             href="{{ route('signin.critaku') }}" class="ms-1 text-indigo-600 hover:underline">Sign

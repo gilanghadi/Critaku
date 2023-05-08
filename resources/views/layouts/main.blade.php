@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('assets/fontawesome-free-6.4.0-web/css/all.css') }}">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
     <title>Critaku</title>
     @vite('resources/css/app.css')
 </head>
@@ -24,6 +26,7 @@
     <div id="main" class="mx-auto py-10">
         @yield('content')
     </div>
+    <x-footer />
     <script src="{{ asset('assets/fontawesome-free-6.4.0-web/js/all.js') }}"></script>
     @vite('resources/js/app.js')
     <script type="text/javascript">
@@ -41,6 +44,14 @@
                 togglePassword.classList.add('fa fa-eye-slash');
             }
         })
+    </script>
+    <script type="text/javascript">
+        $('#option').on('change', function(e) {
+            const opt = $('#option').val();
+            if (opt === 'other') {
+                $('#inputCategory').css('display', 'block');
+            }
+        });
     </script>
 </body>
 

@@ -12,26 +12,21 @@ class HomeController extends Controller
 {
   public function index()
   {
+    if (!Auth::user()) {
+      return redirect()->route('signin.critaku')->with('error', 'Your Are Not Login');
+    }
     return view('users.home.index', [
-      'blogs' => Blog::with(['author', 'category'])->where('user_id', '=', Auth::id())->paginate(6)
+      'blogs' => Blog::with(['author', 'category'])->where('user_id', '=', Auth::id())->paginate(6)->withQueryString(),
     ]);
   }
 
-  public function create()
+  public function profile(User $user)
   {
     if (!Auth::user()) {
       return redirect()->route('signin.critaku')->with('error', 'Your Are Not Login');
     }
-    return view('users.home.create', [
-      'categories' => Category::all()
+    return view('users.profile.index', [
+      'user' => $user
     ]);
-  }
-
-  public function profile()
-  {
-    if (!Auth::user()) {
-      return redirect()->route('signin.critaku')->with('error', 'Your Are Not Login');
-    }
-    return view('users.profile.index');
   }
 }

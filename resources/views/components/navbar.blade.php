@@ -4,7 +4,7 @@
             <div class="flex items-center justify-start">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +13,7 @@
                         </path>
                     </svg>
                 </button>
-                <div class="flex flex-shrink-0 items-center space-x-4">
+                <div class="lg:flex-shrink-0 lg:items-center lg:space-x-4 hidden lg:flex">
                     <a href="{{ route('home.critaku') }}"
                         class="text-3xl font-bold  text-indigo-700 font-mono antialiased no-underline">Critaku</a>
                     <a href="{{ route('home.critaku') }}"
@@ -24,14 +24,18 @@
                         class="text-gray-300 hover:border-b-2 border-indigo-600 hover:text-white px-4 py-3  text-sm font-medium {{ Route::is('category.critaku') ? 'border-b-2 text-white' : '' }}">Topics</a>
                 </div>
             </div>
+            <div class="lg:hidden">
+                <a href="{{ route('home.critaku') }}"
+                    class="text-3xl font-bold  text-indigo-700 font-mono antialiased no-underline">Critaku</a>
+            </div>
             <div class="flex items-center">
                 @guest
                     <div>
                         <a href="{{ route('signin.critaku') }}"
-                            class="text-gray-300 px-4 border-e-2 text-sm font-medium {{ Route::is('signin.critaku') ? 'text-white' : '' }}">Sign
+                            class="text-gray-300 px-3 bg-indigo-700 py-1 rounded-md text-sm font-medium {{ Route::is('signin.critaku') ? 'text-white' : '' }}">Sign
                             in</a>
                         <a href="{{ route('register.critaku') }}"
-                            class="text-gray-300 px-2 text-sm font-medium  {{ Route::is('register.critaku') ? 'text-white' : '' }}">Register</a>
+                            class="text-gray-300 px-2 text-sm border-s py-1 ms-1 font-medium  {{ Route::is('register.critaku') ? 'text-white' : '' }}">Register</a>
                     </div>
                 @endguest
                 @auth
@@ -41,8 +45,14 @@
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full"
-                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                                @if (Auth::user()->image)
+                                    <img class="rounded-full w-8 h-8"
+                                        src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
+                                        alt="image description">
+                                @else
+                                    <img class="rounded-full w-8 h-8"
+                                        src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}" alt="image description">
+                                @endif
                             </button>
                         </div>
                         <div class="z-50 hidden my-4 text-base list-none bg-indigo-900 divide-y divide-gray-100 rounded shadow"
