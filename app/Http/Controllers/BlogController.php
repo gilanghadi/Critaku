@@ -120,6 +120,9 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        if ($blog->image) {
+            Storage::delete($blog->image);
+        }
         Blog::destroy($blog->id);
         return redirect()->route('home.critaku')->with('success', 'Deleted Successed!');
     }
