@@ -3,7 +3,9 @@
     <x-sidebar />
     <div class="lg:w-7/12 md:mx-14 lg:ms-64 xl:mx-auto mt-10 mx-5">
         <h1 class="text-3xl text-gray-300 border-b border-gray-400 mb-8 pb-4 font-sans font-medium">Update Your Blog</h1>
-        <form action="{{ route('homeUpdate.critaku', $blog->slug) }}" class="w-full" method="post">
+        <form action="{{ route('homeUpdate.critaku', $blog->slug) }}" class="w-full" method="post"
+            enctype="multipart/form-data">
+            <input type="hidden" name="image" value="{{ $blog->image }}">
             @csrf
             <div class="mb-6">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-400">Title
@@ -47,8 +49,23 @@
                             <option value="{{ $category->id }}" class="capitalize">{{ $category->name }}</option>
                         @endif
                     @endforeach
-                    <option value="other">Other</option>
                 </select>
+            </div>
+            <div class="mb-14">
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-400">Image
+                </label>
+                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->image }}" id="img-preview"
+                    class="w-52 mb-5 rounded-sm">
+                <input type="file" id="image" name="image"
+                    class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full inputAutofill @error('image')
+                    border-red-500
+                @enderror"
+                    value="{{ old('image', $blog->image) }}" onchange="preview()">
+                @error('image')
+                    <div class="text-red-500 text-sm">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-10">
                 <input id="body" type="hidden" name="body"
@@ -87,5 +104,18 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault()
         })
+
+        function preview() {
+            const imgPreview = document.querySelector('#img-preview')
+            const inputImage = document.querySelector('#image')
+            imgPreview.style.display = 'block'
+
+            const oFReader = new FileReader()
+            oFReader.readAsDataURL(inputImage.files[0])
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result
+            }
+        }
     </script>
 @endsection

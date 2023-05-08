@@ -19,7 +19,7 @@
                             {{ $blog->category->name }}
                         </a>
                         @if ($blog->image)
-                            <img class="rounded-t-lg w-full h-60" src="{{ asset('storage/' . $blog->image) }}"
+                            <img class="rounded-t-lg w-full h-72" src="{{ asset('storage/' . $blog->image) }}"
                                 alt="{{ $blog->image }}" />
                         @else
                             <img class="rounded-t-lg w-full h-60"

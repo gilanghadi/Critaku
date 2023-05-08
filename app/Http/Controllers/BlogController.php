@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\File;
 
 class BlogController extends Controller
 {
@@ -42,12 +43,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = $request->validate([
             'title' => 'required|max:225',
             'slug' => 'required|unique:blogs',
-            'image' => 'required|image|mimes:jpg,png,jpeg|max:3048|',
+            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:5000',
             'category_id' => 'required',
-            'excerpt' => 'required',
             'body' => 'required',
         ]);
 
@@ -55,15 +56,9 @@ class BlogController extends Controller
             $validator['image'] = $request->file('image')->store('image/blog');
         }
 
-        $validator['excerpt'] = Str::limit(strip_tags($request->body), '200');
+        $validator['excerpt'] = Str::limit(strip_tags($request->body), 200);
         $validator['user_id'] = Auth::user()->id;
         Blog::create($validator);
-
-        $category = new Category();
-        $category->id = $category->id->count() + 1;
-        $category->name = $request->name;
-        $category->slug = $request->name;
-        $category->save();
         return redirect()->route('home.critaku')->with('success', 'New Blog Has Been Added');
     }
 
@@ -98,7 +93,8 @@ class BlogController extends Controller
         $validator = $request->validate([
             'title' => 'required|max:225',
             'category_id' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:5000',
         ]);
 
         if ($request->slug != $blog->slug) {
@@ -107,6 +103,14 @@ class BlogController extends Controller
 
         $validator['user_id'] = Auth::user()->id;
         $validator['excerpt'] = Str::limit(strip_tags($request->body), '200');
+
+        if ($request->file('image')) {
+            if (File::exists($request->file('image'))) {
+                Storage::delete($blog->image);
+            };
+            $validator['image'] = $request->file('image')->store('image/blog');
+        }
+
         Blog::where('id', $blog->id)->update($validator);
         return redirect()->route('home.critaku')->with('success', 'Blog Has Been Updated');
     }

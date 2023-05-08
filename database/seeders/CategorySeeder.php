@@ -27,8 +27,26 @@ class CategorySeeder extends Seeder
         );
         DB::table('categories')->insert(
             [
-                'name' => 'web design',
-                'slug' => 'web_design',
+                'name' => 'design',
+                'slug' => 'design',
+            ],
+        );
+        DB::table('categories')->insert(
+            [
+                'name' => 'biografi',
+                'slug' => 'biografi',
+            ],
+        );
+        DB::table('categories')->insert(
+            [
+                'name' => 'sejarah',
+                'slug' => 'sejarah',
+            ],
+        );
+        DB::table('categories')->insert(
+            [
+                'name' => 'other',
+                'slug' => 'other',
             ],
         );
     }

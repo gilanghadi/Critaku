@@ -4,16 +4,18 @@
     <div class="lg:w-7/12 md:mx-14 lg:ms-64 xl:mx-auto mt-10 mx-5">
         <form action="{{ route('profileUpdate.critaku', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="password" value="{{ Auth::user()->password }}">
+            <input type="hidden" name="image" value="{{ Auth::user()->image }}">
             <div class="flex items-center">
                 @if (Auth::user()->image)
-                    <img class="rounded-full w-24 h-24" src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
-                        alt="image description">
+                    <img class="rounded-full w-24 h-24" src="{{ asset('storage/' . Auth::user()->image) }}"
+                        alt="image description" id="img-preview">
                 @else
                     <img class="rounded-full w-24 h-24" src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
-                        alt="image description">
+                        alt="image description" id="img-preview">
                 @endif
                 <input type="file" id="image" name="image" class="ms-3 text-gray-300 text-sm"
-                    value="{{ old('image', Auth::user()->image) }}">
+                    value="{{ old('image', Auth::user()->image) }}" onchange="preview()">
                 @error('image')
                     <div class="text-red-700 text-sm">
                         {{ $message }}
@@ -62,4 +64,21 @@
             </span>
         </form>
     </div>
+
+
+
+    <script type="text/javascript">
+        function preview() {
+            const imgPreview = document.querySelector('#img-preview')
+            const inputImage = document.querySelector('#image')
+            imgPreview.style.display = 'block'
+
+            const oFReader = new FileReader()
+            oFReader.readAsDataURL(inputImage.files[0])
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result
+            }
+        }
+    </script>
 @endsection

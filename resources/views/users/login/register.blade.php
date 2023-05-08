@@ -83,6 +83,7 @@
                                     <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
                                 @enderror
                             </div>
+                            <p class="text-extrasmall text-gray-400 ">Password min : 8, Using symbols, Mixedcase</p>
                             @error('password')
                                 <div class="text-red-500 text-xs font-sans mt-1">
                                     {{ $message }}

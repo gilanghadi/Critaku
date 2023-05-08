@@ -43,6 +43,6 @@
             </div>
         </div>
         <hr class="w-11/12 mt-5 mb-3">
-        <p class="text-center text-gray-400 font-sans text-sm">&copy; Critaku 2023, All right reserved.</p>
+        <p class="text-center text-gray-400 font-sans text-sm">&copy; Critaku 2023 All right reserved.</p>
     </footer>
 </div>

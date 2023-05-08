@@ -46,8 +46,7 @@
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
                                 @if (Auth::user()->image)
-                                    <img class="rounded-full w-8 h-8"
-                                        src="{{ asset('assets/img/neom-L64iwsbPefU-unsplash.jpg') }}"
+                                    <img class="rounded-full w-8 h-8" src="{{ asset('storage/' . Auth::user()->image) }}"
                                         alt="image description">
                                 @else
                                     <img class="rounded-full w-8 h-8"

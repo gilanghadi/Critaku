@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\User;
+use FFI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -77,15 +79,21 @@ class UserController extends Controller
         $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
-            'image' => 'image',
+            'image' => 'required',
+            'password' => 'required'
         ]);
+
+        if ($request->username != $user->username) {
+            $validator['username'] = $request->username;
+        } else {
+            $validator['username'] = 'required|unique:users,username';
+        }
 
         if ($request->file('image')) {
             $validator['image'] = $request->file('image')->store('image/profile');
-        }
-
-        if ($request->username != $user->username) {
-            $validator['username'] =  'required|unique:users';
+        } elseif (Storage::exists($request->file('image'))) {
+            Storage::delete($user->image);
+            $validator['image'] = $request->file('image')->store('image/profile');
         }
 
         User::where('id', Auth::user()->id)->update($validator);

@@ -3,8 +3,7 @@
     <x-sidebar />
     <div class="mx-5 lg:w-7/12 md:mx-14 lg:ms-64 xl:mx-auto mt-10">
         <h1 class="text-3xl text-gray-300 border-b border-gray-400 mb-8 pb-4 font-sans font-medium">Create Your Blog</h1>
-        <form action="{{ route('homeStore.critaku') }}" class="w-full" method="post" enctype="multipart/form-data"
-            id="form">
+        <form action="{{ route('homeStore.critaku') }}" class="w-full" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-6">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-400">Title
@@ -48,22 +47,12 @@
                             <option value="{{ $category->id }}" class="capitalize">{{ $category->name }}</option>
                         @endif
                     @endforeach
-                    <option value="other" id="other">other</option>
+                    @error('category_id')
+                        <div class="text-red-500 text-sm right-0 bottom-0">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </select>
-            </div>
-            <div class="mb-6" id="inputCategory">
-                <label for="categories" class="block mb-2 text-sm font-medium text-gray-400">Category
-                </label>
-                <input type="text" id="categories" name="name"
-                    class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full p-2.5 inputAutofill @error('categories')
-                    border-red-500
-                @enderror"
-                    value="{{ old('name') }}">
-                @error('name')
-                    <div class="text-red-500 text-sm">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
             <div class="mb-14">
                 <label for="image" class="block mb-2 text-sm font-medium text-gray-400">Image
