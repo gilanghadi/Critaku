@@ -47,7 +47,7 @@ class BlogController extends Controller
         $validator = $request->validate([
             'title' => 'required|max:225',
             'slug' => 'required|unique:blogs',
-            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:5000',
+            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:3000',
             'category_id' => 'required',
             'body' => 'required',
         ]);
@@ -94,7 +94,7 @@ class BlogController extends Controller
             'title' => 'required|max:225',
             'category_id' => 'required',
             'body' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:5000',
+            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:3000',
         ]);
 
         if ($request->slug != $blog->slug) {
