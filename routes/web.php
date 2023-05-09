@@ -24,7 +24,7 @@ Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('hom
 Route::get('/dashboard/profile', 'App\Http\Controllers\HomeController@profile')->name('profile.critaku')->middleware('auth');
 Route::post('/dashboard/profile/{id}/update', 'App\Http\Controllers\UserController@updateProfile')->name('profileUpdate.critaku')->middleware('auth');
 
-Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
+Route::get('/', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
 Route::get('/blog/show/{blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');
 Route::get('/blog?author={author:username}', 'App\Http\Controllers\UserController@index')->name('blog.author.critaku');
 
