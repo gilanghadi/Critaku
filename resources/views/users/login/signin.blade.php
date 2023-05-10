@@ -1,18 +1,21 @@
 @extends('layouts.main')
 @section('content')
+    <div class="lg:hidden">
+        <x-sidebar />
+    </div>
     <div class="flex justify-center mt-10">
         <form action="{{ route('signinPost.critaku') }}" method="post" class="mx-auto">
             @csrf
             <div class="mx-auto card px-12 py-8">
                 <h2 class="text-3xl mb-4 font-semibold text-indigo-600">Sign In | Critaku</h2>
                 @if (Session::has('success'))
-                    <div class="bg-indigo-600/20 py-3 px-3 capitalize flex justify-between rounded-lg text-gray-300 text-sm"
+                    <div class="bg-indigo-600/20 text-md lg:text-xl py-3 px-3 capitalize flex justify-between rounded-lg text-gray-300 text-sm"
                         id="alert">
                         {{ Session::get('success') }}
                         <button type="submit" data-collapse-toggle="alert"><i class="fa-solid fa-x"></i></button>
                     </div>
                 @elseif (Session::has('error'))
-                    <div class="bg-red-500/20 py-3 px-3 flex capitalize justify-between rounded-lg text-gray-300 text-sm"
+                    <div class="bg-red-500/20 py-3 px-3 text-md lg:text-xl flex capitalize justify-between rounded-lg text-gray-300 text-sm"
                         id="alert">
                         {{ Session::get('error') }}
                         <button type="submit" data-collapse-toggle="alert"><i class="fa-solid fa-x"></i></button>

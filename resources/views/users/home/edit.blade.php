@@ -37,7 +37,7 @@
                 <p class="ms-1 text-gray-500 text-sm font-sans">Slug Is Automatically Filled According To The Title Blog !
                 </p>
             </div>
-            <div class="mb-14">
+            <div class="mb-10">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-400">Choose Category</label>
                 <select id="category" name="category_id"
                     class="bg-indigo-900  text-gray-300 text-sm rounded-lg focus:ring-indigo-600 block w-full p-2.5">

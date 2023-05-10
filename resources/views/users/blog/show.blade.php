@@ -4,7 +4,7 @@
         <x-sidebar />
     @endauth
     <div class="w-9/12 lg:w-7/12 mx-auto mt-10 rounded overflow-hidden">
-        <div class="font-bold text-3xl lg:text-4xl mb-2 text-indigo-700 capitalize">
+        <div class="font-bold text-2xl lg:text-4xl mb-2 text-indigo-700 capitalize">
             {{ $blog->title }}
         </div>
         @guest
@@ -14,7 +14,7 @@
                     {{ $blog->category->name }}</a>
             </p>
         @else
-            <div class="mb-5 mt-8">
+            <div class="mb-5 mt-8 flex flex-wrap">
                 <a href="{{ route('home.critaku') }}"
                     class="bg-gray-700/30 text-gray-300 text-sm font-medium mr-2 px-2.5 py-2 rounded">
                     <i class="fa-sharp fa-arrow-left text-extrasmall"></i>
@@ -26,7 +26,7 @@
                     <span>Update</span>
                 </a>
                 <a href="{{ route('homeDelete.critaku', $blog->slug) }}"
-                    class="bg-red-700/30 text-red-300 text-sm font-medium mr-2 px-2.5 py-2 rounded">
+                    class="bg-red-700/30 text-red-300 text-sm font-medium mt-2 sm:mt-0 mr-2 px-2.5 py-2 rounded">
                     <i class="fa-solid fa-trash"></i>
                     <span>Delete</span>
                 </a>

@@ -1,16 +1,20 @@
 @extends('layouts.main')
 @section('content')
+    <div class="lg:hidden">
+        <x-sidebar />
+    </div>
     <div class="w-full">
         <div class="mx-auto text-center md:mt-24 mt-10">
             <p class="capitalize text-4xl lg:text-5xl mb-5 font-sans text-gray-300">Explore By Topic</p>
-            <p class="capitalize text-md lg:text-lg text-gray-400 font-sans">This will give you an alternative way to decide
+            <p class="capitalize text-sm mx-2 md:text-lg text-gray-400 font-sans">This will give you an
+                alternative way to decide
                 what
                 <span class="text-indigo-700">//topic</span>
                 to explore next
             </p>
         </div>
         <hr class="border-1 border-gray-400 w-full md:w-7/12 mx-auto mt-5">
-        <div class="mt-10 mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6">
+        <div class="mt-10 mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6 mb-80">
             @foreach ($category as $category)
                 <a href="{{ route('category.critaku.show', $category->slug) }}"
                     class="hover:bg-indigo-700/20 card ease-out duration-300 rounded-2xl">

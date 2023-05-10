@@ -1,4 +1,4 @@
-<div class="card rounded-none z-10 lg:z-20 relative">
+<div class="card rounded-none z-10 lg:z-20 absolute bottom-0">
     <footer class="px-5 W-full lg:w-11/12 mx-auto py-5">
         <div class="grid grid-cols-4 gap-4">
             <div class="antialiased  text-gray-300 col-span-2">
@@ -42,7 +42,7 @@
                 </ul>
             </div>
         </div>
-        <hr class="w-11/12 mt-5 mb-3">
+        <hr class="w-full mt-5 mb-3">
         <p class="text-center text-gray-400 font-sans text-sm">&copy; Critaku 2023 All right reserved.</p>
     </footer>
 </div>

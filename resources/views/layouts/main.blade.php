@@ -12,21 +12,25 @@
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
         crossorigin="anonymous"></script>
+    <style>
+        .scroll::-webkit-scrollbar {
+            display: none
+        }
+    </style>
     <title>Critaku</title>
     @vite('resources/css/app.css')
 </head>
 
 <body class="bg-indigo-950">
-    <x-navbar />
-    {{-- @if (Route::is('blog.critaku'))
-        <x-sidebar />
-    @elseif (Route::is('home.critaku'))
-        <x-sidebar />
-    @endif --}}
-    <div id="main" class="mx-auto py-10">
-        @yield('content')
+    <div id="main" class="mx-auto py-10 relative">
+        <x-navbar />
+        <div class="mb-72 sm:mb-64">
+            @yield('content')
+        </div>
+        <div class="absolute bottom-0 left-0 right-0">
+            <x-footer />
+        </div>
     </div>
-    <x-footer />
     <script src="{{ asset('assets/fontawesome-free-6.4.0-web/js/all.js') }}"></script>
     @vite('resources/js/app.js')
     <script type="text/javascript">

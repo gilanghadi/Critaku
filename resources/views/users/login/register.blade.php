@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('content')
+    <div class="lg:hidden">
+        <x-sidebar />
+    </div>
     <div class="flex justify-center w-full mx-auto mt-10">
         <form action="{{ route('registerPost.critaku') }}" method="post" class="">
             @csrf
