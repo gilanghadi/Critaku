@@ -63,7 +63,7 @@
         @endif
         <div class="lg:ms-64 xl:mx-auto mt-3 mx-5">
             @if (Session::has('success'))
-                <div class="bg-indigo-600/20 py-4 px-5 mb-5 flex justify-between rounded-lg text-gray-300 text-sm"
+                <div class="bg-indigo-600/20 py-4 px-5 mb-5 flex justify-between rounded-lg text-gray-300 text-md"
                     id="alert">
                     {{ Session::get('success') }}
                     <button type="submit" data-collapse-toggle="alert"><i class="fa-solid fa-x"></i></button>
