@@ -79,7 +79,7 @@ class UserController extends Controller
         $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
-            'image' => 'required|size:3000',
+            'image' => 'required|max:5000',
             'password' => 'required'
         ]);
 
