@@ -33,13 +33,13 @@
                 <div class="mb-4 mx-5 lg:mx-0">
                     <div class="card p-5 rounded-lg flex flex-col lg:flex-row">
                         <div class="flex">
-                            @if ($b->author->image)
-                                <img src="{{ asset('storage/' . $b->author->image) }}"
-                                    class="h-20 w-20 rounded-lg text-center mb-3 lg:mb-0" alt="" />
+                            <img src="{{ asset('storage/' . $b->author->image) }}"
+                                class="h-20 w-20 rounded-lg text-center mb-3 lg:mb-0" alt="" />
+                            {{-- @if ($b->author->image)
                             @else
                                 <img src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
                                     class="h-20 w-20 rounded-lg text-center mb-3 lg:mb-0" alt="" />
-                            @endif
+                            @endif --}}
                             <span class="text-gray-300 ms-3 flex items-center lg:hidden">{{ $b->author->username }}</span>
                         </div>
                         <div class="flex flex-col w-full lg:ms-5">
