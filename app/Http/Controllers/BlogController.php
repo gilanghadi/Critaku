@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\File;
+use PhpParser\Node\Stmt\Catch_;
 
 class BlogController extends Controller
 {
@@ -79,6 +80,12 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $blog = Blog::findOrFail($blog->id);
+
+        if ($blog->author->id !== Auth::id()) {
+            return back()->with('error', '
+            You are not the owner of this blog');
+        }
+
         return view('users.home.edit', [
             'blog' => $blog,
             'categories' => Category::all()
@@ -90,12 +97,19 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+
+        if ($blog->author->id !== Auth::id()) {
+            return back()->with('error', '
+            You are not the owner of this blog');
+        }
+
         $validator = $request->validate([
             'title' => 'required|max:225',
             'category_id' => 'required',
             'body' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg|file|max:3000',
         ]);
+
 
         if ($request->slug != $blog->slug) {
             $validator['slug'] = 'required|unique:blogs';
@@ -105,7 +119,7 @@ class BlogController extends Controller
         $validator['excerpt'] = Str::limit(strip_tags($request->body), '200');
 
         if ($request->file('image')) {
-            if (File::exists($request->file('image'))) {
+            if (Storage::exists($request->file('image'))) {
                 Storage::delete($blog->image);
             };
             $validator['image'] = $request->file('image')->store('image/blog');
@@ -120,11 +134,17 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        if ($blog->image) {
-            Storage::delete($blog->image);
+
+        if ($blog->author->id !== Auth::id()) {
+            return back()->with('error', '
+            You are not the owner of this blog');
+        } else {
+            Blog::destroy($blog->id);
+            if ($blog->image) {
+                Storage::delete($blog->image);
+            }
+            return redirect()->route('home.critaku')->with('success', 'Deleted Successed!');
         }
-        Blog::destroy($blog->id);
-        return redirect()->route('home.critaku')->with('success', 'Deleted Successed!');
     }
 
     public function checkSlug(Request $request)
