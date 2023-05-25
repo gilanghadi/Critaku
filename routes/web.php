@@ -33,8 +33,8 @@ Route::get('/dashboard/blog/checkSlug', 'App\Http\Controllers\BlogController@che
 Route::get('/dashboard/blog/create',  'App\Http\Controllers\BlogController@create')->name('homeCreate.critaku')->middleware('auth');
 Route::post('/dashboard/blog/store',  'App\Http\Controllers\BlogController@store')->name('homeStore.critaku')->middleware('auth');
 Route::get('/dashboard/blog/{blog:slug}/edit',  'App\Http\Controllers\BlogController@edit')->name('homeEdit.critaku')->middleware('auth');
-Route::post('/dashboard/blog/{blog:slug}/update',  'App\Http\Controllers\BlogController@update')->name('homeUpdate.critaku');
-Route::get('/dashboard/blog/{blog:slug}/delete', 'App\Http\Controllers\BlogController@destroy')->name('homeDelete.critaku');
+Route::post('/dashboard/blog/{blog:slug}/update',  'App\Http\Controllers\BlogController@update')->name('homeUpdate.critaku')->middleware('auth');
+Route::get('/dashboard/blog/{blog:slug}/delete', 'App\Http\Controllers\BlogController@destroy')->name('homeDelete.critaku')->middleware('auth');
 
 Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category.critaku');
 Route::get('/blog?category={category:slug}', 'App\Http\Controllers\CategoryController@show')->name('category.critaku.show');

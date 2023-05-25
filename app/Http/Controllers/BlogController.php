@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -42,16 +43,10 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
 
-        $validator = $request->validate([
-            'title' => 'required|max:225',
-            'slug' => 'required|unique:blogs',
-            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:3000',
-            'category_id' => 'required',
-            'body' => 'required',
-        ]);
+        $validator = $request->validated();
 
         if ($request->file('image')) {
             $validator['image'] = $request->file('image')->store('image/blog');
@@ -103,12 +98,7 @@ class BlogController extends Controller
             You are not the owner of this blog');
         }
 
-        $validator = $request->validate([
-            'title' => 'required|max:225',
-            'category_id' => 'required',
-            'body' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg|file|max:3000',
-        ]);
+        $validator = $request->validated();
 
 
         if ($request->slug != $blog->slug) {
