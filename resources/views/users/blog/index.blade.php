@@ -47,7 +47,7 @@
                                 <span>
                                     <a href="{{ route('blog.critaku.show', $b->slug) }}"
                                         class="text-indigo-700 hover:underline font-bold text-xl mb-2 capitalizes">
-                                        {{ \Illuminate\Support\Str::limit($b->title, 40, '...') }}
+                                        {{ \Illuminate\Support\Str::limit($b->title, 35, '...') }}
                                     </a>
                                 </span>
                                 <span>

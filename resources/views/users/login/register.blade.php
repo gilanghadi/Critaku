@@ -82,9 +82,8 @@
                                     border-red-500
                                 @enderror duration-300 focus:ring-0 outline-none"
                                     autocomplete="off" value="{{ old('password') }}" required>
-                                @error('password')
-                                    <i class="fa-solid fa-exclamation text-red-500 bottom-4 text-sm absolute right-2"></i>
-                                @enderror
+                                <i class="fa-solid fa-eye-slash text-gray-400 cursor-pointer bottom-4 text-sm absolute right-2"
+                                    id="toggle"></i>
                             </div>
                             <p class="text-extrasmall text-gray-400 ">Password min : 8, Using symbols, Mixedcase</p>
                             @error('password')
@@ -106,4 +105,21 @@
             </div>
         </form>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '#toggle', function() {
+                let input = $('#password')
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text")
+                    $('#toggle').removeClass('fa fa-eye-slash')
+                    $('#toggle').addClass('fa fa-eye')
+                } else {
+                    input.attr("type", "password")
+                    $('#toggle').removeClass('fa fa-eye')
+                    $('#toggle').addClass('fa fa-eye-slash')
+                }
+            })
+        })
+    </script>
 @endsection

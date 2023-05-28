@@ -60,7 +60,7 @@
                                 <p class="text-sm text-gray-300" role="none">
                                     {{ auth()->user()->username }}
                                 </p>
-                                <p class="text-sm font-medium text-gray-500 truncate" role="none">
+                                <p class="text-sm w-40 font-medium text-gray-500 truncate" role="none">
                                     {{ auth()->user()->email }}
                                 </p>
                             </div>

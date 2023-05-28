@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Image;
 use App\Models\User;
-use FFI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -40,7 +40,7 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($validator)) {
+        if (Auth::attempt($validator, $request->remember)) {
             $request->session()->regenerateToken();
             return redirect()->intended('/dashboard')->with('success', '
             Login successed');
@@ -74,7 +74,7 @@ class UserController extends Controller
         return redirect()->route('blog.critaku');
     }
 
-    public function updateProfile(Request $request, User $user)
+    public function updateProfile(Request $request, User $user, Image $image)
     {
         $validator = $request->validate([
             'name' => 'required',
@@ -83,19 +83,27 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if ($request->username != $user->username) {
+        if ($request->username !== $user->username) {
             $validator['username'] = $request->username;
         } else {
             $validator['username'] = 'required|unique:users,username';
         }
 
         if ($request->file('image')) {
-            $validator['image'] = $request->file('image')->store('image/profile');
-        } elseif (Storage::exists($request->file('image'))) {
-            Storage::delete($user->image);
-            $validator['image'] = $request->file('image')->store('image/profile');
+            $image = public_path('storage/' . $image->url);
+            if (File::exists($image)) {
+                File::delete($image);
+            };
+            $validator['image'] = $request->file('image')->store('image/profile', 'public');
         }
+        $image = $validator['image'];
 
+        User::where('id', Auth::id())->update($validator);
+        Image::where('imageable_id', '===', Auth::id())->update([
+            'url' => $image,
+            'imageable_id' => Auth::id(),
+            'imageable_type' => 'App\User'
+        ]);
         User::where('id', Auth::user()->id)->update($validator);
         return redirect()->route('profile.critaku')->with('success', 'Profile has been updated');
     }

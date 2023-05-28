@@ -16,9 +16,9 @@
             </div>
         @endif
         @if ($blog->author->id !== Auth::id())
-            <p class="mt-5 mb-3 text-md text-white">By<a href="" class="text-gray-400 underline">
+            <p class="mt-5 mb-3 text-md text-white">By<a href="" class="text-gray-400 hover:underline">
                     {{ $blog->author->username }}</a> in
-                <a href="{{ route('category.critaku.show', $blog->category->slug) }}" class="text-gray-400 underline">
+                <a href="{{ route('category.critaku.show', $blog->category->slug) }}" class="text-gray-400 hover:underline">
                     {{ $blog->category->name }}</a>
             </p>
         @else
@@ -54,21 +54,83 @@
             {!! html_entity_decode($blog->body) !!}
         </div>
         @if ($blog->author->id !== Auth::id())
-            <div class="pb-5 pt-3">
+            <div class="pb-16 pt-3">
                 <a href="{{ route('blog.critaku') }}"
                     class="text-gray-200 flex items-center hover:bg-indigo-600 bg-indigo-700 text-center px-3 rounded-md py-1 w-32 text-md ease-out duration-300 hover:text-white"><i
                         class="fa-sharp fa-arrow-left me-2 text-extrasmall"></i>back home</a>
             </div>
         @endif
+        <div class="mt-20">
+            <h3 class="sm:text-md text-2xl text-white mb-4 font-semibold">Comments Section</h4>
+                @if ($blog->author->id !== Auth::id())
+                    <button type="button"
+                        class="bg-gray-400 px-4 py-1 mb-3 hover:bg-gray-300 ease-out duration-300 hover:text-indigo-600 font-sans font-semibold rounded-md"
+                        id="display-form"><i class="fa-regular fa-comment"></i> Comment</button>
+                    @if (Session::has('success'))
+                        <div class="bg-indigo-600/20 text-md py-3 px-3 capitalize flex justify-between rounded-lg text-gray-300 text-sm"
+                            id="alert">
+                            {{ Session::get('success') }}
+                            <button type="button" data-collapse-toggle="alert"><i class="fa-solid fa-x"></i></button>
+                        </div>
+                    @endif
+                    <form action="{{ route('postcomment.critaku', $blog->id) }}" method="post" id="comment"
+                        class="hidden">
+                        @csrf
+                        <textarea name="comment_body" id="comment_body"
+                            class="bg-indigo-900 text-gray-300 h-28 text-sm rounded-lg p-2.5 inputAutofill block w-full" required
+                            autocomplete="off"></textarea>
+                        <button type="submit"
+                            class="text-gray-200 flex mt-3 items-center hover:bg-indigo-600 bg-indigo-700 text-center px-4 rounded-md py-2 text-md ease-out duration-300 hover:text-white">Submit</button>
+                    </form>
+                @endif
+                @if ($comments->count())
+                    <div class="overflow-auto h-screen scroll mt-7">
+                        <div class="mb-4 mx-5 lg:mx-0">
+                            @foreach ($comments as $comment)
+                                <div class="p-5 flex border-b border-gray-400 flex-col lg:flex-row">
+                                    <div class="flex">
+                                        @if ($blog->author->image)
+                                            <img src="{{ asset('storage/' . $blog->author->image) }}"
+                                                class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
+                                                alt="{{ $blog->author->image }}" />
+                                        @else
+                                            <img src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
+                                                class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0" alt="" />
+                                        @endif
+                                    </div>
+                                    <div class="flex flex-col w-full lg:ms-5">
+                                        <div class="flex flex-row justify-between mb-2">
+                                            <span>
+                                                <a href="{{ route('blog.author.critaku', $comment->user->username) }}"
+                                                    class="items-center hover:underline leading-none text-indigo-700 me-2">
+                                                    {{ $comment->user->name }}
+                                                </a>
+                                                <span
+                                                    class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</span>
+                                            </span>
+                                        </div>
+                                        <p class="text-gray-400 mb-4">
+                                            {{ $comment->comment_body }}
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+        </div>
     </div>
 
 
     <script type="text/javascript">
-        let button = document.getElementById('close');
-        let alert = document.getElementById('alert');
+        $(document).ready(function() {
+            $('#close').on('click', function() {
+                $('#alert').addClass('hidden');
+            })
 
-        button.addEventListener('click', function() {
-            alert.classList.add('hidden');
+            $('#display-form').on('click', function() {
+                $('#comment').toggle('slide')
+            })
         })
     </script>
 @endsection

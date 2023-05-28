@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(table: 'users', indexName: 'comments_user_id');
-            $table->foreignId('blog_id')->constrained(table: 'blogs', indexName: 'comments_blog_id');
-            $table->text('comment_body');
-            $table->integer('parent')->nullable();
+            $table->bigInteger('imageable_id')->unsigned();
+            $table->string('imageable_type');
+            $table->string('url', 255);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('images');
     }
 };

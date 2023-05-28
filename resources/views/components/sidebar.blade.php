@@ -11,28 +11,28 @@
             </li>
             <li>
                 <a href="{{ route('blog.critaku') }}"
-                    class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-indigo-900/30 {{ Route::is('blog.critaku') ? 'text-white' : '' }}">
+                    class="flex items-center p-3 text-gray-300 rounded-lg hover:bg-indigo-900/30 {{ Route::is('blog.critaku') ? 'text-white bg-indigo-900/30' : '' }}">
                     <i class="fa-solid fa-share {{ Route::is('blog.critaku') ? 'text-indigo-600' : '' }}"></i>
                     <span class="ml-3">All Threads</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('home.critaku') }}"
-                    class="flex items-center p-2 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('home.critaku') ? 'text-white' : '' }}">
+                    class="flex items-center p-3 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('home.critaku') ? 'text-white bg-indigo-900/30' : '' }}">
                     <i class="fa-regular fa-newspaper {{ Route::is('home.critaku') ? 'text-indigo-600' : '' }}"></i>
                     <span class="ml-3">My Blog</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('category.critaku') }}"
-                    class="flex items-center p-2 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('home.critaku') ? 'text-white' : '' }} lg:hidden">
+                    class="flex items-center p-3 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('home.critaku') ? 'text-white bg-indigo-900/30' : '' }} lg:hidden">
                     <i class="fa-solid fa-border-all {{ Route::is('category.critaku') ? 'text-indigo-600' : '' }}"></i>
                     <span class="ml-3">Topics</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('profile.critaku') }}"
-                    class="flex items-center p-2 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('profile.critaku') ? 'text-white' : '' }}">
+                    class="flex items-center p-3 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('profile.critaku') ? 'text-white bg-indigo-900/30' : '' }}">
                     <i class="fa-solid fa-user {{ Route::is('profile.critaku') ? 'text-indigo-600' : '' }}"></i>
                     <span class="ml-3">Profile</span>
                 </a>
@@ -42,7 +42,7 @@
                     <form action="{{ route('logout.critaku') }}" method="post">
                         @csrf
                         <button type="submit"
-                            class="w-full p-2 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
+                            class="w-full p-3 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
                             role="menuitem"><i class="fa-solid fa-right-from-bracket me-3 text-white"></i> Sign
                             Out</button>
                     </form>

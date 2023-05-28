@@ -34,6 +34,11 @@
                     border-red-500
                 @enderror"
                     readonly value="{{ old('slug', $blog->slug) }}" required>
+                @error('slug')
+                    <div class="text-red-500 text-sm">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <p class="ms-1 text-gray-500 text-sm font-sans">Slug Is Automatically Filled According To The Title Blog !
                 </p>
             </div>
@@ -68,8 +73,7 @@
                 @enderror
             </div>
             <div class="mb-10">
-                <input id="body" type="hidden" name="body"
-                    value="{{ old('body', strip_tags(html_entity_decode($blog->body))) }}">
+                <input id="body" type="hidden" name="body" value="{!! old('body', $blog->body) !!}">
                 <trix-editor input="body" class="text-gray-300 border-2 rounded-lg border-indigo-900"></trix-editor>
                 @error('body')
                     <div class="text-red-500 text-sm">
