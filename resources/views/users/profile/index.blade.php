@@ -8,8 +8,13 @@
             <input type="hidden" name="image" value="{{ Auth::user()->image }}">
             <div class="flex items-center">
                 @if (Auth::user()->image)
-                    <img class="rounded-full w-24 h-24" src="{{ asset('storage/' . Auth::user()->image) }}"
-                        alt="image description" id="img-preview">
+                    @if (file_exists('storage/' . Auth::user()->image))
+                        <img class="rounded-full w-24 h-24" src="{{ asset('storage/' . Auth::user()->image) }}"
+                            alt="image description" id="img-preview">
+                    @else
+                        <img class="rounded-full w-24 h-24" src="{{ Auth::user()->image }}" alt="image description"
+                            id="img-preview">
+                    @endif
                 @else
                     <img class="rounded-full w-24 h-24" src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
                         alt="image description" id="img-preview">

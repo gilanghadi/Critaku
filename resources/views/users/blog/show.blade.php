@@ -90,9 +90,15 @@
                                 <div class="p-5 flex border-b border-gray-400 flex-col lg:flex-row">
                                     <div class="flex">
                                         @if ($comment->user->image)
-                                            <img src="{{ asset('storage/' . $comment->user->image) }}"
-                                                class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
-                                                alt="{{ $comment->user->image }}" />
+                                            @if (file_exists('storage/' . $comment->user->image))
+                                                <img src="{{ asset('storage/' . $comment->user->image) }}"
+                                                    class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
+                                                    alt="{{ $comment->user->image }}" />
+                                            @else
+                                                <img src="{{ $comment->user->image }}"
+                                                    class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
+                                                    alt="{{ $comment->user->image }}" />
+                                            @endif
                                         @else
                                             <img src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
                                                 class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0" alt="" />

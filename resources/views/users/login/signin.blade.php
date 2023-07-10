@@ -22,7 +22,7 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
-                <div class="relative z-0 w-full mb-10 group mt-10">
+                <div class="relative z-0 w-full mb-10 group mt-8">
                     <div class="flex flex-row relative">
                         <input type="email" name="email" id="email"
                             class="block py-2.5 px-2 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-700 peer inputAutofill @error('email')
@@ -42,7 +42,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="relative z-0 w-full mb-8 group mt-10">
+                <div class="relative z-0 w-full mb-6 group mt-10">
                     <div class="flex flex-row relative">
                         <input type="password" name="password" id="password"
                             class="block py-2.5 px-2 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-700 inputAutofill peer @error('password')
@@ -66,12 +66,17 @@
                             {{ old('remember') ? 'checked' : '' }}>
                         <label class="text-gray-300 font-sans ms-2" for="remember">Remember Me</label>
                     </div>
+                    <a href="{{ route('github.critaku') }}"
+                        class="bg-slate-900 w-full text-center text-gray-300 font-semibold text-md rounded-full py-1 mb-2"
+                        type="submit" name="submit"><i class="fa-brands fa-github"></i> Login With Github</a>
+                    <a href="{{ route('google.critaku') }}"
+                        class="bg-red-900 w-full text-center text-gray-300 font-semibold text-md rounded-full py-1 mb-2"
+                        type="submit" name="submit"><i class="fa-brands fa-google"></i> Login With Google</a>
                     <button class="bg-indigo-700 w-full text-gray-300 font-semibold text-md rounded-full py-1 mb-3"
                         type="submit" name="submit">Sign in</button>
                     <p class="text-gray-400 text-sm">You Dont Have Any Account?<a href="{{ route('register.critaku') }}"
                             class="ms-1 text-indigo-600 hover:underline">Register</a>
                     </p>
-
                 </div>
             </div>
         </form>

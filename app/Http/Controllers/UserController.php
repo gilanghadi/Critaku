@@ -9,9 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -68,10 +67,17 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('blog.critaku');
+        try {
+            if ($request->provider_id) {
+                User::where('provider_id', $request->provider_id)->first()->delete();
+                return redirect()->route('blog.critaku');
+            }
+        } catch (\Throwable $th) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('blog.critaku');
+        }
     }
 
     public function updateProfile(Request $request, User $user, Image $image)
@@ -106,5 +112,46 @@ class UserController extends Controller
         ]);
         User::where('id', Auth::user()->id)->update($validator);
         return redirect()->route('profile.critaku')->with('success', 'Profile has been updated');
+    }
+
+
+    // login with github
+    public function githubRedirect()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function callbackHandleGithub()
+    {
+        $githubUser = Socialite::driver('github')->user();
+        $user = User::updateOrCreate([
+            'provider_id' => $githubUser->id,
+            'name' => $githubUser->name,
+            'username' => $githubUser->nickname,
+            'email' => $githubUser->email,
+            'image' => $githubUser->avatar
+        ]);
+        Auth::login($user);
+        return redirect()->route('home.critaku')->with('success', 'Login successed');
+    }
+
+    // login with google
+    public function googleRedirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackHandleGoogle()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        $user = User::updateOrCreate([
+            'provider_id' => $googleUser->id,
+            'name' => $googleUser->name,
+            'username' => $googleUser->name,
+            'email' => $googleUser->email,
+            'image' => $googleUser->avatar
+        ]);
+        Auth::login($user);
+        return redirect()->route('home.critaku')->with('success', 'Login successed');
     }
 }

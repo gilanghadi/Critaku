@@ -41,6 +41,9 @@
                 <li>
                     <form action="{{ route('logout.critaku') }}" method="post">
                         @csrf
+                        @if (Auth::user()->provider_id !== null)
+                            <input type="hidden" name="provider_id" value="{{ Auth::user()->provider_id }}">
+                        @endif
                         <button type="submit"
                             class="w-full p-3 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
                             role="menuitem"><i class="fa-solid fa-right-from-bracket me-3 text-white"></i> Sign
