@@ -76,6 +76,7 @@
                     <form action="{{ route('postcomment.critaku', $blog->id) }}" method="post" id="comment"
                         class="hidden">
                         @csrf
+                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                         <textarea name="comment_body" id="comment_body"
                             class="bg-indigo-900 text-gray-300 h-28 text-sm rounded-lg p-2.5 inputAutofill block w-full" required
                             autocomplete="off"></textarea>

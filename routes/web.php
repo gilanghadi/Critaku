@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,11 @@ Route::post('/logout', 'App\Http\Controllers\UserController@logout')->name('logo
 Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('home.critaku')->middleware('auth');
 Route::get('/dashboard/profile', 'App\Http\Controllers\HomeController@profile')->name('profile.critaku')->middleware('auth');
 Route::post('/dashboard/profile/{id}/update', 'App\Http\Controllers\UserController@updateProfile')->name('profileUpdate.critaku')->middleware('auth');
+
+// route notification
+Route::get('/notification', [NotificationController::class, 'index'])->name('notification.critaku');
+Route::get('/notification/markread/{id}', [NotificationController::class, 'markread'])->name('markread');
+Route::get('/notification/markallread', [NotificationController::class, 'markallread'])->name('markallread');
 
 // route blog
 Route::get('/', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');

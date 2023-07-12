@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentRequest;
 use App\Models\Blog;
+use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
+use App\Models\Notification;
+use App\Notifications\CommentNotifications;
 
 class CommentController extends Controller
 {
@@ -38,6 +41,12 @@ class CommentController extends Controller
         $validator['user_id'] = Auth::id();
         $validator['blog_id'] = $blog->id;
         $blog = Comment::create($validator);
+
+        // make notification
+        $user = User::where('id', Auth::user()->id)->first();
+        $blog = Blog::where('id', $request->blog_id)->first();
+        Auth::user()->notify(new CommentNotifications($user, $blog));
+
         return back()->with('success', 'Post comment for this blog success');
     }
 

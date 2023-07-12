@@ -67,12 +67,13 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        try {
-            if ($request->provider_id) {
-                User::where('provider_id', $request->provider_id)->first()->delete();
-                return redirect()->route('blog.critaku');
-            }
-        } catch (\Throwable $th) {
+        if ($request->provider_id) {
+            Auth::logout();
+            User::where('provider_id', $request->provider_id)->first()->delete();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('blog.critaku');
+        } else {
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
