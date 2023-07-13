@@ -44,6 +44,7 @@ Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.cri
 Route::get('/blog/show/blog={blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');
 Route::get('/blog?author={author:username}', 'App\Http\Controllers\UserController@index')->name('blog.author.critaku');
 Route::post('/comment/{blog}', 'App\Http\Controllers\CommentController@store')->name('postcomment.critaku')->middleware('auth');
+Route::get('/comment/{comment:comment_body}', 'App\Http\Controllers\CommentController@destroy')->name('deletecomment.critaku')->middleware('auth');
 
 // route home dashboard auth
 Route::get('/dashboard/blog/checkSlug', 'App\Http\Controllers\BlogController@checkSlug')->middleware('auth');
