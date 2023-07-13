@@ -37,10 +37,41 @@
                     <span class="ml-3">Profile</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('notification.critaku') }}"
+                    class="flex items-center p-3 text-gray-300 rounded-lg  hover:bg-indigo-900/30 {{ Route::is('notification.critaku') ? 'text-white bg-indigo-900/30' : '' }}">
+                    <i class="fa-solid fa-bell {{ Route::is('notification.critaku') ? 'text-indigo-600' : '' }}"></i>
+                    <span class="ml-3">Notification
+                        @auth
+                            @php
+                                $notification = \App\Models\Notification::all();
+                                $notifCount = false;
+                            @endphp
+                            @foreach ($notification as $notif)
+                                @php
+                                    $data = json_decode($notif->data);
+                                @endphp
+                                @if ($data->blog_user_id === Auth::id())
+                                    @php
+                                        $notifCount = true;
+                                    @endphp
+                                @endif
+                            @endforeach
+                            @if ($notifCount)
+                                <span
+                                    class="bg-indigo-700 text-white ms-4 rounded-full py-0 px-1">{{ $notification->count() }}</span>
+                            @endif
+                        @endauth
+                    </span>
+                </a>
+            </li>
             @auth
                 <li>
                     <form action="{{ route('logout.critaku') }}" method="post">
                         @csrf
+                        @if (Auth::user()->provider_id !== null)
+                            <input type="hidden" name="provider_id" value="{{ Auth::user()->provider_id }}">
+                        @endif
                         <button type="submit"
                             class="w-full p-3 flex text-sm items-center text-gray-300 rounded-lg hover:bg-indigo-900/30"
                             role="menuitem"><i class="fa-solid fa-right-from-bracket me-3 text-white"></i> Sign

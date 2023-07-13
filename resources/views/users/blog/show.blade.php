@@ -76,6 +76,7 @@
                     <form action="{{ route('postcomment.critaku', $blog->id) }}" method="post" id="comment"
                         class="hidden">
                         @csrf
+                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                         <textarea name="comment_body" id="comment_body"
                             class="bg-indigo-900 text-gray-300 h-28 text-sm rounded-lg p-2.5 inputAutofill block w-full" required
                             autocomplete="off"></textarea>
@@ -90,9 +91,15 @@
                                 <div class="p-5 flex border-b border-gray-400 flex-col lg:flex-row">
                                     <div class="flex">
                                         @if ($comment->user->image)
-                                            <img src="{{ asset('storage/' . $comment->user->image) }}"
-                                                class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
-                                                alt="{{ $comment->user->image }}" />
+                                            @if (file_exists('storage/' . $comment->user->image))
+                                                <img src="{{ asset('storage/' . $comment->user->image) }}"
+                                                    class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
+                                                    alt="{{ $comment->user->image }}" />
+                                            @else
+                                                <img src="{{ $comment->user->image }}"
+                                                    class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0"
+                                                    alt="{{ $comment->user->image }}" />
+                                            @endif
                                         @else
                                             <img src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}"
                                                 class="h-14 w-14 rounded-lg text-center mb-3 lg:mb-0" alt="" />
@@ -109,9 +116,18 @@
                                                     class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</span>
                                             </span>
                                         </div>
-                                        <p class="text-gray-400 mb-4">
-                                            {{ $comment->comment_body }}
-                                        </p>
+                                        <div class="flex flex-row justify-between">
+                                            <p class="text-gray-400 mb-4">
+                                                {{ $comment->comment_body }}
+                                            </p>
+                                            @if ($comment->user_id === Auth::id())
+                                                <span>
+                                                    <a href="{{ route('deletecomment.critaku', $comment->comment_body) }}"
+                                                        class="text-gray-300 text-xs hover:underline"><i
+                                                            class="fa-solid fa-trash me-1"></i>delete</a>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach

@@ -46,8 +46,13 @@
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
                                 @if (Auth::user()->image)
-                                    <img class="rounded-full w-8 h-8" src="{{ asset('storage/' . Auth::user()->image) }}"
-                                        alt="image description">
+                                    @if (file_exists('storage/' . Auth::user()->image))
+                                        <img class="rounded-full w-8 h-8"
+                                            src="{{ asset('storage/' . Auth::user()->image) }}" alt="image description">
+                                    @else
+                                        <img class="rounded-full w-8 h-8" src="{{ Auth::user()->image }}"
+                                            alt="image description">
+                                    @endif
                                 @else
                                     <img class="rounded-full w-8 h-8"
                                         src="{{ asset('assets/img/profil-wa-kosong-peri.jpg') }}" alt="image description">
@@ -73,6 +78,10 @@
                                 <li>
                                     <form action="{{ route('logout.critaku') }}" method="post">
                                         @csrf
+                                        @if (Auth::user()->provider_id !== null)
+                                            <input type="hidden" name="provider_id"
+                                                value="{{ Auth::user()->provider_id }}">
+                                        @endif
                                         <button type="submit"
                                             class="block ps-4 text-start w-full py-2 text-sm text-gray-400 hover:bg-gray-600/30 hover:text-white"
                                             role="menuitem">Sign
