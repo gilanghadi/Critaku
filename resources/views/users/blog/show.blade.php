@@ -116,9 +116,18 @@
                                                     class="text-gray-400 text-sm">{{ $comment->created_at->diffForHumans() }}</span>
                                             </span>
                                         </div>
-                                        <p class="text-gray-400 mb-4">
-                                            {{ $comment->comment_body }}
-                                        </p>
+                                        <div class="flex flex-row justify-between">
+                                            <p class="text-gray-400 mb-4">
+                                                {{ $comment->comment_body }}
+                                            </p>
+                                            @if ($comment->user_id === Auth::id())
+                                                <span>
+                                                    <a href="{{ route('deletecomment.critaku', $comment->comment_body) }}"
+                                                        class="text-gray-300 text-xs hover:underline"><i
+                                                            class="fa-solid fa-trash me-1"></i>delete</a>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
