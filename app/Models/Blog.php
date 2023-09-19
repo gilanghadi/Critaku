@@ -12,6 +12,9 @@ class Blog extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
+    protected $casts  = [
+        'social_media' => 'array'
+    ];
 
 
     public function scopeFilter($query, array $filters)
@@ -39,6 +42,11 @@ class Blog extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function topics()
+    {
+        return $this->belongsTo(Topic::class, 'topic_id', 'id');
+    }
+
 
     public function sluggable(): array
     {
@@ -52,5 +60,10 @@ class Blog extends Model
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function socialMedia()
+    {
+        return $this->hasMany(SocialMedia::class, 'blog_id', 'blog_id');
     }
 }

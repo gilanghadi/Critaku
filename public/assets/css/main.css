@@ -1,3 +1,7 @@
+*{
+  scroll-behavior: smooth;
+}
+
 :root {
   --bg-color-primary: rgba(31, 41, 55, 0.932);
 }
@@ -29,10 +33,15 @@
   -webkit-text-fill-color: #8E95A4 !important;
 }
 
+
 trix-toolbar [data-trix-button-group="file-tools"] {
   display: none !important
 }
 
 .trix-button-group .trix-button {
   background-color: white !important;
+}
+
+.select2 {
+  width: 100% !important;
 }

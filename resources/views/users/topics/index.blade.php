@@ -13,27 +13,28 @@
                 to explore next
             </p>
         </div>
-        <hr class="border-1 border-gray-400 w-full md:w-7/12 mx-auto mt-5">
-        <div class="mt-10 mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6 mb-80">
-            @foreach ($category as $category)
-                <a href="{{ route('category.critaku.show', $category->slug) }}"
-                    class="hover:bg-indigo-700/20 card ease-out duration-300 rounded-2xl">
-                    <div class="flex flex-row w-full py-2">
-                        <div class="flex items-center m-4">
-                            <img src="https://plus.unsplash.com/premium_photo-1674599004939-000417962c69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"
-                                class="h-10 w-12 rounded" alt="" />
-                        </div>
-                        <div class="w-full mt-3 md:block">
-                            <h1 class="text-left text-lg font-semibold text-indigo-700 capitalize">
-                                {{ $category->name }}
-                            </h1>
-                            <div class="text-left md:block text-gray-400" style="font-size: 12px;">
-                                {{ $category->blog->count() }} blogs
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
+        <div class="w-10/12 flex mx-auto justify-center mt-16 overflow-hidden">
+            <ul class="flex text-gray-300 gap-6 lg:gap-10 scroll-topic">
+                <li>
+                    <button type="button" id="tab-all" name="tab-all">
+                        <span
+                            class="capitalize font-sans font-semibold text-md lg:text-lg validation-all {{ $tab === 'all' ? 'text-gray-300 opacity-100' : 'opacity-30' }}">All</span>
+                    </button>
+                </li>
+                @foreach ($categories as $key => $category)
+                    <li>
+                        <button type="button" name="tab-{{ $category->slug }}">
+                            <span
+                                class="capitalize font-sans font-semibold text-md lg:text-lg {{ $tab === $category->slug ? 'text-gray-300 opacity-100' : 'opacity-30' }}"
+                                id="tab-id" data-tab="{{ $category->slug }}">{{ $category->name }}</span>
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        <hr class="border-1 border-gray-400 w-full md:w-8/12 mx-auto mt-5 opacity-10" />
+        <div class="content-box">
+            @include('users.topics.all_topic')
         </div>
     </div>
 @endsection

@@ -1,7 +1,7 @@
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 lg:z-10 w-64 h-screen pt-20 transition-transform -translate-x-full bg-indigo-950 lg:translate-x-0"
+    class="fixed top-0 left-0 z-40 lg:z-10 w-64 bg-slate-950  h-screen pt-20 transition-transform -translate-x-full lg:translate-x-0"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-indigo-950 ">
+    <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2">
             <li class="mb-4">
                 <a href="{{ route('homeCreate.critaku') }}"

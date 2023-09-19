@@ -42,7 +42,7 @@ Route::get('/notification/markallread', [NotificationController::class, 'markall
 Route::get('/', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
 Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.critaku');
 Route::get('/blog/show/blog={blog:slug}', 'App\Http\Controllers\BlogController@show')->name('blog.critaku.show');
-Route::get('/blog?author={author:username}', 'App\Http\Controllers\UserController@index')->name('blog.author.critaku');
+Route::get('/blog?author={author:username}', 'App\Http\Controllers\BlogController@index')->name('blog.author.critaku');
 Route::post('/comment/{blog}', 'App\Http\Controllers\CommentController@store')->name('postcomment.critaku')->middleware('auth');
 Route::get('/comment/{comment:comment_body}', 'App\Http\Controllers\CommentController@destroy')->name('deletecomment.critaku')->middleware('auth');
 
@@ -53,7 +53,12 @@ Route::post('/dashboard/blog/store',  'App\Http\Controllers\BlogController@store
 Route::get('/dashboard/blog/{blog:slug}/edit',  'App\Http\Controllers\BlogController@edit')->name('homeEdit.critaku')->middleware('auth');
 Route::post('/dashboard/blog/{blog:slug}/update',  'App\Http\Controllers\BlogController@update')->name('homeUpdate.critaku')->middleware('auth');
 Route::get('/dashboard/blog/{blog:slug}/delete', 'App\Http\Controllers\BlogController@destroy')->name('homeDelete.critaku')->middleware('auth');
+Route::post('/dashboard/{id}/delete/sosmed',  'App\Http\Controllers\BlogController@deleteSocialMedia')->name('DeleteSosmed.critaku')->middleware('auth');
 
 // route categories
 Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category.critaku');
-Route::get('/blog?category={category:slug}', 'App\Http\Controllers\CategoryController@show')->name('category.critaku.show');
+Route::get('/categories?topic={topic:slug}', 'App\Http\Controllers\CategoryController@index')->name('topic.critaku');
+Route::get('/blog?category={category:slug}', 'App\Http\Controllers\BlogController@index')->name('category.critaku.show');
+
+// route topics
+Route::get('/blog?topic={topic:slug}', 'App\Http\Controllers\BlogController@index')->name('topic.critaku.show');

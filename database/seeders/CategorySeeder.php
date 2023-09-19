@@ -13,41 +13,46 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categories')->insert(
+        $categories = [
             [
-                'name' => 'programing',
+                'name' => 'Programming',
                 'slug' => 'programing',
             ],
-        );
-        DB::table('categories')->insert(
             [
-                'name' => 'personal',
+                'name' => 'Cybersecurity',
+                'slug' => 'cyber-security',
+            ],
+            [
+                'name' => 'Server',
+                'slug' => 'server',
+            ],
+            [
+                'name' => 'Article',
+                'slug' => 'article',
+            ],
+            [
+                'name' => 'Personal',
                 'slug' => 'personal',
             ],
-        );
-        DB::table('categories')->insert(
             [
-                'name' => 'design',
+                'name' => 'Design',
                 'slug' => 'design',
             ],
-        );
-        DB::table('categories')->insert(
             [
-                'name' => 'biografi',
+                'name' => 'Biografi',
                 'slug' => 'biografi',
             ],
-        );
-        DB::table('categories')->insert(
             [
-                'name' => 'sejarah',
+                'name' => 'Sejarah',
                 'slug' => 'sejarah',
             ],
-        );
-        DB::table('categories')->insert(
             [
-                'name' => 'other',
+                'name' => 'Other',
                 'slug' => 'other',
             ],
-        );
+        ];
+        foreach ($categories as $category) {
+            DB::table('categories')->insert($category);
+        }
     }
 }

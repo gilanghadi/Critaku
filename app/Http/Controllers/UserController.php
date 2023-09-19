@@ -14,13 +14,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
-    public function index(User $author)
-    {
-        return view('users.blog.author', [
-            'blog' => $author->blog->load('category', 'author'),
-        ]);
-    }
-
     public function signin()
     {
         return view('users.login.signin');

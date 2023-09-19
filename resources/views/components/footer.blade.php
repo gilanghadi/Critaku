@@ -35,7 +35,7 @@
             <div class="font-bold text-gray-300">
                 <p class="font-semibold text-md font-sans mb-3">SUPPORT</p>
                 <ul class="list-none">
-                    <li><a href="https://gilanghadi.netlify.app"
+                    <li><a href="https://gilanghadi.vercel.app"
                             class="text-sm text-gray-500 font-sans no-underline hover:underline hover:text-gray-400"
                             target="blank">Gilanghadi</a>
                     </li>

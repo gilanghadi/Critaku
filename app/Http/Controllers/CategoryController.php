@@ -3,20 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Topic;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\TopicCategory;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Topic $topic, Request $request)
     {
-        $category = Category::with(['blog'])->get();
+        $categories = Category::with(['blog'])->get();
+        $topicToCategory = TopicCategory::with(['topic'])->limit(10)->get();
+        $tab = $request->tab ? $request->tab : 'all';
+        $sortTopicTab = $request->tab ? $request->tab : 'all';
+        $blogs = Blog::all();
+
+        if ($sortTopicTab == 'all') {
+            $topicToCategory = TopicCategory::with(['topic'])->limit(10)->get()->unique('topic_id');
+        } else {
+            $topicToCategory = TopicCategory::with(['category', 'topic'])->whereHas('category', function ($query) use ($sortTopicTab) {
+                return $query->where('slug', $sortTopicTab);
+            })->limit(10)->get()->unique('topic_id');
+        }
+
         return view('users.topics.index', [
-            'category' => $category,
-            'blog' => Blog::where('category_id', $category)
+            'categories' => $categories,
+            'topicToCategory' => $topicToCategory,
+            'tab' => $tab,
+            'blogs' => $blogs
         ]);
     }
 
