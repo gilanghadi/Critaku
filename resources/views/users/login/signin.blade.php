@@ -67,11 +67,13 @@
                         <label class="text-gray-300 font-sans ms-2" for="remember">Remember Me</label>
                     </div>
                     <a href="{{ route('github.critaku') }}"
-                        class="bg-slate-900 w-full text-center text-gray-300 font-semibold text-md rounded-full py-1 mb-2"
-                        type="submit" name="submit"><i class="fa-brands fa-github"></i> Login With Github</a>
+                        class="w-full text-center text-gray-300 font-semibold text-md rounded-full py-1 mb-2" type="submit"
+                        name="submit" style="background-color: #0F172A !important"><i class="fa-brands fa-github"></i>
+                        Login With Github</a>
                     <a href="{{ route('google.critaku') }}"
                         class="bg-red-900 w-full text-center text-gray-300 font-semibold text-md rounded-full py-1 mb-2"
-                        type="submit" name="submit"><i class="fa-brands fa-google"></i> Login With Google</a>
+                        type="submit" name="submit" style="background-color: #771D1D !important"><i
+                            class="fa-brands fa-google"></i> Login With Google</a>
                     <button class="bg-indigo-700 w-full text-gray-300 font-semibold text-md rounded-full py-1 mb-3"
                         type="submit" name="submit">Sign in</button>
                     <p class="text-gray-400 text-sm">You Dont Have Any Account?<a href="{{ route('register.critaku') }}"
