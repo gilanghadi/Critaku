@@ -1,6 +1,6 @@
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 lg:z-10 w-64 bg-slate-950  h-screen pt-20 transition-transform -translate-x-full lg:translate-x-0"
-    aria-label="Sidebar">
+    class="fixed top-0 left-0 z-40 lg:z-10 w-64 h-screen pt-20 transition-transform -translate-x-full lg:translate-x-0"
+    aria-label="Sidebar" style="background-color: #020617 !important">
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2">
             <li class="mb-4">

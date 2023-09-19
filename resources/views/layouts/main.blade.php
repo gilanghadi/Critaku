@@ -27,7 +27,7 @@
     @yield('css')
 </head>
 
-<body class="bg-slate-950">
+<body style="background-color: #020617 !important">
     <div id="main" class="mx-auto py-10 relative">
         <x-navbar />
         <div class="mb-72 sm:mb-64">
